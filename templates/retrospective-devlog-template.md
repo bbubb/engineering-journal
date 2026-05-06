@@ -1,6 +1,6 @@
 # Title
 
-## At a Glance
+## Snapshot
 - **Project:** 
 - **Focus:** 
 - **Core problem:** 
