@@ -1,2 +1,2 @@
-# dev-log
-Engineering journal documenting architectural decisions, AWS cloud integration, and full-stack development patterns to track project evolution and technical growth.
+# Engineering-Journal
+Engineering journal documenting full-stack architecture, cloud integration, system design decisions, and technical growth across portfolio projects.
