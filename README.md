@@ -1,16 +1,13 @@
 # Engineering Journal
 
-Engineering journal documenting architectural decisions, AWS cloud integration, and full-stack development patterns to track project evolution and technical growth.
+This repository documents my technical growth across full-stack development, systems architecture, cloud integration, and AI-assisted software design.
 
-## Current Focus Areas
+The focus is not only what I built, but why I made certain architectural decisions, what trade-offs I encountered, and how those lessons inform my current path toward cloud-focused solutions architecture and integration engineering.
+
+Current focus areas include:
 
 - SquadSync: full-stack team and competition management platform
 - Soccer-Subber: explainable lineup and substitution decision engine
 - TeamTracker: serverless event and notification proof of concept
 - AWS certification path: SAA → DVA → AIF
 - Architecture logs, learning notes, and project retrospectives
-
-## Retrospectives
-
-- [SquadSync Phase 0 Foundation Retrospective](retrospectives/2026-05-19-squadsync-phase-0-foundation.md)
-- [SquadSync Agentic Harness Engineering Retrospective](retrospectives/2026-05-19-squadsync-agentic-harness-engineering.md)
