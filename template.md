@@ -6,7 +6,7 @@
 |---|---|
 | Title | [Entry title] |
 | Type | Project Retrospective / Technical Learning Note / Architecture Reflection / Decision Review / Certification Note / Troubleshooting Note |
-| Subject | [Project, topic, or technology area] |
+| Subject | [Project, topic, certification, or technology area] |
 | Date | [YYYY-MM-DD] |
 | Status | Draft / In Progress / Complete / Updated |
 | Phase | Optional; use for project entries when applicable |
@@ -18,31 +18,39 @@
 
 ## Summary
 
-State the entry's main point in a few concise paragraphs.
+Summarize the entry in two to four concise paragraphs. Explain what the entry covers and why it matters.
 
 ## Context
 
-Explain what prompted the work or learning. Include the relevant project, certification path, technical problem, or decision context.
+Explain the situation that prompted this work or learning.
+
+For project entries, include the phase, sprint, problem, constraints, and intended outcome.
+
+For topic entries, include the course, technology, concept, or practical problem being studied.
 
 ## Key Ideas / Decisions
 
-Capture the most important concepts, design choices, implementation decisions, or learning takeaways.
+Capture the most important concepts, decisions, or takeaways.
 
-Use subsections when helpful.
+Use short subsections when needed.
 
 ## Trade-offs
 
-Explain the meaningful alternatives, costs, risks, benefits, or constraints.
+Explain meaningful alternatives, costs, benefits, risks, or constraints.
+
+Delete this section if it does not add value.
 
 ## What Changed / What I Learned
 
-For project entries, summarize what changed.
+For project entries, summarize what changed in the project or workflow.
 
-For topic entries, summarize the reusable knowledge or mental model gained.
+For topic entries, summarize the reusable knowledge, mental model, or technical skill gained.
 
 ## What Was Deferred / Open Questions
 
 List what was intentionally left out, postponed, or still unclear.
+
+Delete this section if it does not add value.
 
 ## Lessons Learned
 
@@ -50,7 +58,7 @@ Summarize the durable lessons that should inform future work.
 
 ## Current Relevance
 
-Explain how this entry supports current goals, portfolio signal, job readiness, certification progress, or future implementation work.
+Explain how the entry supports portfolio signal, job readiness, certification progress, project execution, or future technical decisions.
 
 ## Next Steps
 
@@ -71,6 +79,13 @@ For project entry filenames, prefer:
 phase-<n>-sprint-<n>-<topic>.md
 ```
 
-Use only the most specific stable scope that applies. If sprint or issue does not apply, omit that field from the filename and metadata.
+Use phase and sprint together when both are known and useful for navigation. Keep issue numbers in metadata unless the entry is specifically an issue-level postmortem.
+
+For topic entry filenames, prefer concise subject names such as:
+
+```text
+aws/ec2-foundations.md
+architecture/clean-architecture-boundaries.md
+```
 
 Do not use date-prefixed filenames by default. Dates belong in metadata unless the entry is explicitly a chronological log.
