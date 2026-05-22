@@ -18,22 +18,24 @@
 
 ## Summary
 
-Phase 0 established SquadSync as a professional, agent-ready MVP workspace before application code begins. The original goal was to rebuild SquadSync into a focused soccer team-management MVP, but the phase expanded to include documentation governance, repo structure, planning workflow, and AI-assisted development standards.
+Phase 0 established SquadSync as a professional, agent-ready MVP workspace before application code begins.
 
-The result is a repo foundation designed to support both human review and AI-assisted implementation. Instead of relying on hidden chat history, SquadSync now uses GitHub docs, issues, PRs, ADRs, `AGENTS.md`, `PLANS.md`, and workflow guides as durable project memory.
+The original goal was to rebuild SquadSync into a focused soccer team-management MVP. The phase expanded because the project also needed reliable planning, scope control, documentation governance, repo structure, and AI-assisted development standards before implementation could safely begin.
+
+The outcome is a foundation where GitHub docs, issues, PRs, ADRs, `AGENTS.md`, `PLANS.md`, and workflow guides act as durable project memory instead of relying on hidden chat history.
 
 ## Context
 
-The starting point was a public repo shell with legacy project history and an intent to build a focused MVP quickly enough to support job-search and portfolio goals.
+SquadSync started as a public rebuild of earlier private/archived work. The aim was to create a focused MVP that could demonstrate full-stack architecture, cloud readiness, and disciplined engineering practice without exposing unnecessary long-term platform/IP ideas.
 
 Key constraints:
 
 - Keep the MVP narrow and soccer-focused.
-- Preserve broader Competition Catalog ideas without exposing unnecessary IP.
-- Use low-cost or near-zero-cost tools where possible.
+- Preserve broader Competition Catalog ideas without overexposing them publicly.
+- Use low-cost or near-zero-cost tooling where practical.
 - Build toward AWS/cloud readiness without prematurely adding infrastructure complexity.
-- Create a workflow that ChatGPT and Codex CLI can use without relying on fragile chat memory.
-- Avoid starting application code before the project foundation was coherent enough to support agentic implementation.
+- Make the repo usable by ChatGPT and Codex CLI from durable context.
+- Avoid generating application code before the foundation was coherent enough to support agentic implementation.
 
 ## Key Decisions
 
@@ -41,7 +43,7 @@ Key constraints:
 
 The project began with architecture, roadmap, scope, workflow, and repository structure before code.
 
-This delayed the first API scaffold, but it created a clearer foundation for AI-assisted implementation and reduced the chance of rework once code begins.
+This delayed the first API scaffold, but it reduced ambiguity and gave future implementation work a clearer source of truth.
 
 ### Narrowed the MVP around soccer team management
 
@@ -71,7 +73,7 @@ This avoids premature infrastructure decisions and preserves the scale-to-zero M
 
 ### Made Phase 1 API scaffold the next implementation step
 
-The first real code phase will initialize the ASP.NET Core API under `apps/api` with clean architecture boundaries and test projects.
+The first real code phase should initialize the ASP.NET Core API under `apps/api` with clean architecture boundaries and test projects.
 
 ## What Changed
 
@@ -122,11 +124,11 @@ A strong Phase 0 is not just documentation. It is a system for reducing ambiguit
 
 The most important lesson was that AI-assisted development needs durable repo context. Chat discussion is useful for exploration, but the actual project memory must live in GitHub artifacts that future agents and humans can inspect.
 
-Another lesson was that professional discipline can become overbuilt if not bounded. The final Phase 0 closeout standard became: clarify, compress, label, and finalize — then move into implementation.
+Another lesson was that professional discipline can become overbuilt if it is not bounded. The final Phase 0 closeout standard became: clarify, compress, label, finalize, then move into implementation.
 
 ## Current Relevance
 
-This phase is directly relevant to the goal of building a public, high-signal portfolio project while learning cloud and AI-assisted engineering workflows.
+This phase supports the goal of building a public, high-signal portfolio project while learning cloud and AI-assisted engineering workflows.
 
 It demonstrates:
 
@@ -136,7 +138,7 @@ It demonstrates:
 - GitHub issue/PR workflow;
 - AI-assisted SDLC design;
 - readiness for cloud integration;
-- the ability to learn from experienced practitioners and adapt their methods to a smaller MVP.
+- the ability to adapt experienced engineering patterns to a smaller MVP.
 
 ## Next Steps
 
@@ -146,4 +148,4 @@ Phase 1 should begin with:
 Initialize API scaffold under apps/api
 ```
 
-The key test is whether the Phase 0 foundation allows Codex CLI and ChatGPT GitHub to execute Phase 1 work from repo-owned context without relying on hidden chat history.
+The key test is whether the Phase 0 foundation lets Codex CLI and ChatGPT GitHub execute Phase 1 work from repo-owned context without relying on hidden chat history.

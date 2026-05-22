@@ -18,11 +18,11 @@
 
 ## Summary
 
-During SquadSync Phase 0, the project expanded from a standard MVP setup into an experiment in low-cost, sequential agentic software development.
+During SquadSync Phase 0, the project expanded from a standard MVP setup into a practical experiment in low-cost, sequential agentic software development.
 
-The central question was whether a solo developer using ChatGPT Plus, GitHub, and Codex CLI could approximate some of the benefits of a more expensive multi-agent harness: role separation, durable context, repeatable task execution, validation gates, and human review control.
+The central question was whether a solo developer using ChatGPT Plus, GitHub, and Codex CLI could approximate some benefits of a more mature multi-agent harness: role separation, durable context, repeatable task execution, validation gates, and human review control.
 
-The resulting workflow is not a fully autonomous multi-agent system. It is a sequential, repo-driven harness where ChatGPT supports architecture and planning, GitHub stores durable task and decision state, Codex CLI handles scoped implementation, and the human owner remains responsible for architecture, review, and merge decisions.
+The resulting workflow is not a fully autonomous system. It is a sequential, repo-driven harness where ChatGPT supports architecture and planning, GitHub stores durable task and decision state, Codex CLI is intended to handle scoped implementation, and the human owner remains responsible for architecture, review, and merge decisions.
 
 ## Context
 
@@ -39,7 +39,7 @@ The challenge was balancing:
 - speed vs. process;
 - learning vs. building;
 - low cost vs. automation;
-- tool-agnostic architecture vs. tool-specific execution;
+- reusable workflow design vs. tool-specific execution;
 - future multi-agent readiness vs. current sequential workflow.
 
 ## External Influence
@@ -113,13 +113,13 @@ docs/agentic-workflow/tools
   -> tool-specific profiles
 ```
 
-This preserved the original goal of modularity without pretending every tool can share identical operational files.
+This preserved modularity without pretending every tool can share identical operational files.
 
 ### Treat Codex CLI as the primary implementation tool
 
-The original plan included ChatGPT, Codex, and GitHub Copilot. After reviewing experienced feedback, GitHub Copilot was removed from the formal workflow. It may still be used locally, but it is not part of the canonical harness.
+The original plan included ChatGPT, Codex, and GitHub Copilot. After reviewing experienced feedback, GitHub Copilot was removed from the formal workflow.
 
-This simplified the agentic stack and aligned better with repeatability.
+It may still be used locally by a human contributor, but it is not part of the canonical harness. This simplified the tool stack and better supports repeatability.
 
 ### Add native Codex skills
 
@@ -139,7 +139,7 @@ docs/agentic-workflow/tools/codex-cli/skills
 
 Hooks, command-policy rules, MCP, and active subagents were documented as future areas but not activated.
 
-This avoided pretending the repo had automation that had not been tested.
+This avoided presenting untested automation as if it already worked.
 
 ### Use scoped `AGENTS.md` files
 
@@ -156,7 +156,7 @@ Current statuses:
 
 ### Benefit: stronger implementation foundation
 
-The repo is now much more navigable for agents and humans. Future work can reference durable project docs instead of reconstructing decisions from chat.
+The repo is now more navigable for agents and humans. Future work can reference durable project docs instead of reconstructing decisions from chat.
 
 ### Cost: delayed coding
 
