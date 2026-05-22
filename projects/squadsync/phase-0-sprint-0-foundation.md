@@ -1,15 +1,20 @@
-# SquadSync Phase 0 Foundation Retrospective
+# SquadSync Phase 0 Foundation
 
-## Snapshot
+## Entry Metadata
 
 | Field | Value |
 |---|---|
-| Project | SquadSync |
-| Entry Type | Project retrospective |
-| Phase | Phase 0 — Agent-Ready Project Foundation |
+| Title | SquadSync Phase 0 Foundation |
+| Type | Project Retrospective |
+| Subject | SquadSync |
 | Date | 2026-05-19 |
-| Status | Complete / transitioning to Phase 1 |
-| Related Repository | https://github.com/bbubb/squadsync |
+| Status | Complete |
+| Phase | Phase 0 — Agent-Ready Project Foundation |
+| Sprint | Sprint 0 |
+| Issue | N/A |
+| Tags | architecture, documentation, planning, mvp-scope, repo-structure |
+| Related Repo | https://github.com/bbubb/squadsync |
+| Related Work | Phase 0 documentation and workflow PRs |
 
 ## Summary
 
@@ -17,7 +22,7 @@ Phase 0 established SquadSync as a professional, agent-ready MVP workspace befor
 
 The result is a repo foundation designed to support both human review and AI-assisted implementation. Instead of relying on hidden chat history, SquadSync now uses GitHub docs, issues, PRs, ADRs, `AGENTS.md`, `PLANS.md`, and workflow guides as durable project memory.
 
-## Problem and Constraints
+## Context
 
 The starting point was a public repo shell with legacy project history and an intent to build a focused MVP quickly enough to support job-search and portfolio goals.
 
@@ -30,23 +35,19 @@ Key constraints:
 - Create a workflow that ChatGPT and Codex CLI can use without relying on fragile chat memory.
 - Avoid starting application code before the project foundation was coherent enough to support agentic implementation.
 
-## Decisions and Trade-offs
+## Key Decisions
 
 ### Chose a docs-first Phase 0
 
 The project began with architecture, roadmap, scope, workflow, and repository structure before code.
 
-Trade-off: this delayed the first backend scaffold.
-
-Benefit: it created a clearer foundation for AI-assisted implementation and reduced the chance of rework once code begins.
+This delayed the first API scaffold, but it created a clearer foundation for AI-assisted implementation and reduced the chance of rework once code begins.
 
 ### Narrowed the MVP around soccer team management
 
 SquadSync remains focused on team, roster, match, and lineup-planning workflows rather than the broader competition-platform vision.
 
-Trade-off: some long-term ideas remain deferred.
-
-Benefit: the public repo is clearer, safer, and easier to evaluate as a portfolio project.
+This keeps the public repo clearer, safer, and easier to evaluate as a portfolio project.
 
 ### Adopted `apps/api` and `apps/web`
 
@@ -60,27 +61,19 @@ docs
 .github
 ```
 
-Trade-off: slightly more abstract than beginner `backend/` and `frontend/` folders.
-
-Benefit: cleaner long-term structure for a full-stack project with future service boundaries.
+This is more scalable than simple `backend/` and `frontend/` folders while still staying understandable.
 
 ### Deferred infrastructure complexity
 
 The project reserves `infra/docker` and `infra/aws` but does not add Terraform, Kubernetes, SAM, CDK, or deployment code yet.
 
-Trade-off: cloud implementation is not yet demonstrated.
-
-Benefit: avoids premature infrastructure decisions and preserves the scale-to-zero MVP direction.
+This avoids premature infrastructure decisions and preserves the scale-to-zero MVP direction.
 
 ### Made Phase 1 API scaffold the next implementation step
 
 The first real code phase will initialize the ASP.NET Core API under `apps/api` with clean architecture boundaries and test projects.
 
-Trade-off: frontend and cloud work remain deferred.
-
-Benefit: establishes the backend foundation required for every later feature.
-
-## What Was Built
+## What Changed
 
 Phase 0 produced:
 
@@ -133,7 +126,7 @@ Another lesson was that professional discipline can become overbuilt if not boun
 
 ## Current Relevance
 
-This phase is directly relevant to my current goal of building a public, high-signal portfolio project while learning cloud and AI-assisted engineering workflows.
+This phase is directly relevant to the goal of building a public, high-signal portfolio project while learning cloud and AI-assisted engineering workflows.
 
 It demonstrates:
 
@@ -145,7 +138,7 @@ It demonstrates:
 - readiness for cloud integration;
 - the ability to learn from experienced practitioners and adapt their methods to a smaller MVP.
 
-## Next Step
+## Next Steps
 
 Phase 1 should begin with:
 
