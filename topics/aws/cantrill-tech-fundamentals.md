@@ -26,7 +26,7 @@ The course helped connect prior IT support specialist, networking, administrator
 
 The goal was to strengthen technical foundations before deeper AWS Solutions Architect Associate study.
 
-Prior exposure included enterprise networking, endpoint support, Active Directory, MFA workflows, VPNs, virtualization, backups, Linux, Docker, and full-stack software development.
+Prior exposure included enterprise networking, switches, endpoint support, Active Directory, MFA workflows, VPNs, virtualization, backups, servers, serverless cloud, and full-stack software development.
 
 ## Key Ideas
 
