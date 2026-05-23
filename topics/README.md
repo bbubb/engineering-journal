@@ -21,4 +21,6 @@ Dates belong in entry metadata unless the entry is explicitly a chronological lo
 
 ## Current Topics
 
-No topic entries yet.
+### AWS
+
+- [Cantrill Tech Fundamentals](aws/cantrill-tech-fundamentals.md)
