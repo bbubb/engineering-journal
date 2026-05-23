@@ -34,6 +34,17 @@ The entry metadata identifies the format, such as project retrospective, technic
 
 - [Phase 0 Sprint 0 Foundation](projects/squadsync/phase-0-sprint-0-foundation.md)
 - [Phase 0 Sprint 0 Agentic Harness Engineering](projects/squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
+- [Legacy Initial Scope, Stack, and Infrastructure](projects/squadsync/legacy-initial-scope-stack-infrastructure.md)
+- [Legacy Role, Membership, and Context Modeling](projects/squadsync/legacy-role-membership-context-modeling.md)
+- [Legacy Platform and Service Boundaries](projects/squadsync/legacy-platform-service-boundaries.md)
+
+### Soccer-Subber
+
+- [Explainable Lineup Engine](projects/soccer-subber/explainable-lineup-engine.md)
+
+### AWS
+
+- [Cantrill Tech Fundamentals](topics/aws/cantrill-tech-fundamentals.md)
 
 ## Indexes
 
