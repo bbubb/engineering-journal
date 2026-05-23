@@ -20,7 +20,7 @@
 
 This entry documents foundational cloud knowledge reinforced through Adrian Cantrill's Tech Fundamentals material.
 
-The course helped connect prior IT support, Linux/server exposure, Dockerized local environments, and software development experience to clearer cloud architecture concepts.
+The course helped connect prior IT support specialist, networking, administrator, Linux/server exposure, containerized local environments, and software development experience to clearer cloud architecture concepts.
 
 ## Context
 
