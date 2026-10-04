@@ -32,6 +32,7 @@ The entry metadata identifies the format, such as project retrospective, technic
 
 ### SquadSync
 
+- [Phase 2 Core Domain, Persistence, and Application Boundary](projects/squadsync/phase-2-core-domain-persistence-and-application-boundary.md)
 - [Phase 1 API Foundation and Workflow Validation](projects/squadsync/phase-1-api-foundation-and-workflow-validation.md)
 - [Phase 0 Sprint 0 Foundation](projects/squadsync/phase-0-sprint-0-foundation.md)
 - [Phase 0 Sprint 0 Agentic Harness Engineering](projects/squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
