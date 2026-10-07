@@ -2,11 +2,11 @@
 
 This repository documents technical growth across full-stack development, systems architecture, cloud integration, and AI-assisted software design.
 
-Its primary public purpose is professional signal: to help potential employers understand what I have built, how I reason about engineering decisions, how my judgment is developing, and where that experience is relevant.
+The journal serves two related purposes: preserving a durable record of what I have built and learned, and presenting that work as a clear, credible public professional artifact.
 
-Entries should work at two levels. A recruiter or non-technical hiring manager should be able to skim the summary, headings, key outcomes, and relevance without needing to understand the implementation. A technical interviewer or engineering reviewer should be able to continue reading and find enough concrete architecture, trade-off, testing, and implementation context to substantiate the reflection.
+Entries should work at two reading depths. A broad reader should be able to skim the summary, headings, key outcomes, and relevance without needing deep technical context. A technical reader should be able to continue into enough architecture, trade-off, testing, and implementation detail to understand and evaluate the engineering behind the reflection.
 
-The journal is therefore neither a project changelog nor a replacement for repository documentation. It captures selected technical context, decisions, mistakes, uncertainties, and lessons when they help explain professional growth. Detailed implementation evidence belongs in the linked repositories, issues, PRs, and project documentation.
+The journal is therefore neither a project changelog nor a replacement for repository documentation. It captures selected technical context, decisions, mistakes, uncertainties, and lessons when they help explain growth or preserve useful knowledge. Detailed implementation evidence belongs in the linked repositories, issues, PRs, and project documentation.
 
 ## Focus Areas
 
