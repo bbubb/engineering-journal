@@ -68,6 +68,35 @@ List practical follow-up actions.
 
 Use this single template for all journal entries.
 
+### Audience and editorial standard
+
+Write primarily for potential employers.
+
+A non-technical recruiter or hiring manager should be able to skim an entry and understand:
+- what was accomplished or learned;
+- why it mattered;
+- what judgment, ownership, or growth the work demonstrates;
+- how it relates to the kinds of roles being pursued.
+
+A technical reviewer should be able to continue reading and find enough concrete engineering detail to validate those claims.
+
+Prefer:
+- plain English before jargon;
+- outcome and insight before implementation detail;
+- selective personal reflection where it shows changed judgment, uncertainty, or growth;
+- the few decisions and trade-offs that materially shaped the work;
+- links to repositories, issues, PRs, or technical docs for exhaustive detail;
+- short sections and minimal repetition so the entry remains skimmable.
+
+Avoid turning an entry into:
+- a changelog;
+- an architecture specification;
+- a tutorial;
+- a transcript of exploratory discussion;
+- a diary of every difficulty or decision.
+
+Do not expose private, proprietary, or unnecessary historical implementation detail merely to make the reflection more complete. The goal is credible professional signal supported by real work, not exhaustive disclosure.
+
 Organize entries by subject:
 
 - project-specific entries go under `projects/<project>/`;
