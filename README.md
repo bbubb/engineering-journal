@@ -2,7 +2,11 @@
 
 This repository documents technical growth across full-stack development, systems architecture, cloud integration, and AI-assisted software design.
 
-The goal is to capture not only what was built or studied, but why specific architectural decisions were made, what trade-offs were encountered, and how those lessons inform future cloud-focused solutions architecture and integration engineering work.
+Its primary public purpose is professional signal: to help potential employers understand what I have built, how I reason about engineering decisions, how my judgment is developing, and where that experience is relevant.
+
+Entries should work at two levels. A recruiter or non-technical hiring manager should be able to skim the summary, headings, key outcomes, and relevance without needing to understand the implementation. A technical interviewer or engineering reviewer should be able to continue reading and find enough concrete architecture, trade-off, testing, and implementation context to substantiate the reflection.
+
+The journal is therefore neither a project changelog nor a replacement for repository documentation. It captures selected technical context, decisions, mistakes, uncertainties, and lessons when they help explain professional growth. Detailed implementation evidence belongs in the linked repositories, issues, PRs, and project documentation.
 
 ## Focus Areas
 
