@@ -70,15 +70,15 @@ Use this single template for all journal entries.
 
 ### Audience and editorial standard
 
-Write primarily for potential employers.
+Write each entry as both a durable learning/history artifact and a public professional reflection.
 
-A non-technical recruiter or hiring manager should be able to skim an entry and understand:
+A broad reader should be able to skim an entry and understand:
 - what was accomplished or learned;
 - why it mattered;
 - what judgment, ownership, or growth the work demonstrates;
-- how it relates to the kinds of roles being pursued.
+- why the experience remains relevant.
 
-A technical reviewer should be able to continue reading and find enough concrete engineering detail to validate those claims.
+A technical reader should be able to continue reading and find enough concrete engineering detail to understand and evaluate the claims.
 
 Prefer:
 - plain English before jargon;
@@ -95,7 +95,7 @@ Avoid turning an entry into:
 - a transcript of exploratory discussion;
 - a diary of every difficulty or decision.
 
-Do not expose private, proprietary, or unnecessary historical implementation detail merely to make the reflection more complete. The goal is credible professional signal supported by real work, not exhaustive disclosure.
+Do not expose private, proprietary, or unnecessary historical implementation detail merely to make the reflection more complete. The goal is a useful, credible record of real work and growth, not exhaustive disclosure.
 
 Organize entries by subject:
 
