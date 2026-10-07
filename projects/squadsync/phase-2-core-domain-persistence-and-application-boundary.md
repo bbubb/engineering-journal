@@ -136,9 +136,9 @@ Ordinary tests remain database-independent while real PostgreSQL validation is o
 
 ## Current Relevance
 
-For a hiring manager, Phase 2 shows that SquadSync has moved beyond scaffolding into real backend design: a persisted domain model, tested relational behavior, an Application workflow, and a repeatable development scenario.
+At a glance, Phase 2 shows that SquadSync has moved beyond scaffolding into real backend design: a persisted domain model, tested relational behavior, an Application workflow, and a repeatable development scenario.
 
-For a technical reviewer, the work provides deeper evidence of domain and relational modeling, Clean Architecture dependency boundaries, EF Core/PostgreSQL migrations, application orchestration, Dependency Injection and developing Dependency Inversion understanding, and real-database integration testing.
+For a deeper technical read, the work demonstrates domain and relational modeling, Clean Architecture dependency boundaries, EF Core/PostgreSQL migrations, application orchestration, Dependency Injection and developing Dependency Inversion understanding, and real-database integration testing.
 
 For me, the phase reflects a shift from recognizing patterns such as layers, services, repositories, and interfaces toward understanding more precisely why those boundaries exist, which direction dependencies should point, and how business concepts can drive implementation decisions.
 
