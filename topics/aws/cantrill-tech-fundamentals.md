@@ -32,13 +32,13 @@ It also helped me articulate the bridge between implementing applications and un
 
 I had worked with networks, VPNs, SSH, authentication, and administrative controls, but the course made it easier to trace traffic through physical links, Ethernet frames, routed packets, and transport protocols. Cryptography likewise became less of a list of tools: I better understood the distinct purposes of encryption, hashing, signatures, and key management.
 
-The value for software development is practical. API requests, service-to-service communication, and operational security all rely on behaviors that are easier to debug and protect when the underlying protocols make sense.
+The distinction between stateful and stateless security controls also became clearer. These fundamentals matter in software development because API requests, service-to-service communication, and network security all depend on behaviors that are easier to troubleshoot when the underlying protocols make sense.
 
 ### Enterprise operations connected to resilience and service ownership
 
 Banking IT exposed me to controlled access, directory services, MFA, monitoring, backup practices, and disaster-recovery environments. The course gave that operational experience a clearer vocabulary, especially the difference between recovery point and recovery time objectives.
 
-It also introduced clearer distinctions among public, private, and hybrid cloud and among infrastructure, platform, and software service models. Those models describe ownership and management responsibility, not simply whether a system is reachable from the public internet.
+The material connected redundancy and disaster recovery to broader questions of resilience. It also clarified public, private, and hybrid cloud; infrastructure, platform, and software service models; and the shared-responsibility model. Those distinctions help explain who owns which operational and security responsibilities, rather than simply where a system is hosted.
 
 ### Cloud integration should follow application needs
 
