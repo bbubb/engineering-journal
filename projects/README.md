@@ -20,6 +20,8 @@ Use phase and sprint together when both are known and useful for project navigat
 
 ### SquadSync
 
+- [Phase 2 Core Domain, Persistence, and Application Boundary](squadsync/phase-2-core-domain-persistence-and-application-boundary.md)
+- [Phase 1 API Foundation and Workflow Validation](squadsync/phase-1-api-foundation-and-workflow-validation.md)
 - [Phase 0 Sprint 0 Foundation](squadsync/phase-0-sprint-0-foundation.md)
 - [Phase 0 Sprint 0 Agentic Harness Engineering](squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
 - [Legacy Initial Scope, Stack, and Infrastructure](squadsync/legacy-initial-scope-stack-infrastructure.md)
