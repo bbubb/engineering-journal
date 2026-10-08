@@ -1,197 +1,60 @@
 # SquadSync Phase 1 — API Foundation and Workflow Validation
 
-## Entry Metadata
+**Project Retrospective** · SquadSync · Phase 1, Sprints 1–2 · October 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | SquadSync Phase 1 — API Foundation and Workflow Validation |
-| Type | Project Retrospective |
-| Subject | SquadSync |
-| Date | 2026-10-01 |
 | Status | Complete |
-| Phase | Phase 1 — API Foundation |
-| Sprint | Sprints 1–2 |
-| Issue | Multiple Phase 1 implementation and workflow issues |
-| Tags | aspnet-core, dotnet, clean-architecture, postgresql, docker, github-actions, testing, health-checks, agentic-workflow |
+| Tags | aspnet-core, dotnet, postgresql, docker, testing, ci, agentic-workflow |
 | Related Repo | https://github.com/bbubb/squadsync |
-| Related Work | PRs #49, #64, #67, #70, #71, #78, #79 |
+| Related Work | PRs #49, #64, #67, #70, #71, #78, #79; deferred issue #72 |
+
+</details>
 
 ## Summary
 
-Phase 1 moved SquadSync from an architecture-and-planning foundation into a working backend baseline. The repository now contains a .NET 10 ASP.NET Core solution with explicit API, Application, Domain, and Infrastructure boundaries; unit and integration test projects; GitHub Actions restore/build/test validation; development Swagger; health endpoints; and a local PostgreSQL environment managed with Docker Compose.
+Phase 1 turned SquadSync's repository plans into an executable backend foundation. It established a .NET 10 ASP.NET Core solution with separate API, Application, Domain, and Infrastructure projects, unit and integration tests, basic GitHub Actions validation, and local PostgreSQL through Docker Compose.
 
-The phase was intentionally about establishing trustworthy engineering boundaries before building product features. PostgreSQL connectivity and operational readiness were proven without prematurely adding EF Core, migrations, or domain persistence. That keeps the next phase focused on modeling the soccer domain rather than untangling infrastructure decisions made too early.
+The phase deliberately stopped short of domain persistence. Its more consequential outcome was testing two assumptions: whether the proposed architecture would create useful boundaries, and whether AI-assisted implementation could proceed reliably from repository-owned instructions and reviewable GitHub issues.
 
-Phase 1 also served as the first practical test of the AI-assisted development workflow designed during Phase 0. Real implementation exposed context-loading, Git lifecycle, and Windows sandbox friction. Instead of expanding permissions or adding bespoke automation immediately, the workflow was refined around issue-first context, short-lived branches, explicit validation, bounded approval escalation, and human review.
+## At a Glance
 
-## Context
+- Established a buildable, testable API baseline without prematurely introducing domain tables or EF Core.
+- Distinguished API liveness from PostgreSQL-dependent readiness and tested failure/recovery behavior.
+- Kept routine CI tests independent of a running database while retaining separate environment-backed checks.
+- Used real implementation friction to refine the issue → Codex → PR → human review process.
 
-Phase 0 defined the MVP, repository structure, architecture direction, and a repo-owned workflow for ChatGPT, GitHub, and Codex. The open question was whether that foundation would remain useful once real implementation began.
+## Key Themes / Reflections
 
-Phase 1 therefore had two goals:
+### Architecture boundaries became enforceable before business logic arrived
 
-1. establish a credible API and local-development baseline; and
-2. validate that the project could be implemented from durable repository context rather than hidden chat history.
+The API solution separated Domain, Application, Infrastructure, and API responsibilities before adding the first soccer entities. That cost additional project structure, but it made dependency direction inspectable: Domain did not depend on persistence or HTTP, while API remained the composition and transport boundary.
 
-The work was split into small, reviewable issues and pull requests rather than a single backend scaffold. This made architectural boundaries and workflow failures visible early, while the codebase was still inexpensive to change.
+I wanted this structure to help future changes, not merely make the repository look architectural. Holding EF Core, migrations, and domain tables until Phase 2 was part of the same decision. The database would be introduced in response to actual domain needs rather than shaping the model in advance.
 
-## Key Ideas / Decisions
+The risk was spending too long on scaffolding. Phase 1 accepted that cost temporarily, with the expectation that later phases would test whether the boundaries genuinely simplified implementation.
 
-### Establish modular boundaries before adding business logic
+### Operational reliability required more than a successful process start
 
-The API solution is organized into separate API, Application, Domain, and Infrastructure projects, plus unit and integration test projects.
+A functioning API is not necessarily an API capable of serving dependency-backed requests. SquadSync distinguished process liveness (`/health`) from PostgreSQL readiness (`/health/ready`), and validated readiness across database availability, failure, and recovery.
 
-The important point is not the number of projects. It is the dependency direction they establish:
+I also learned to treat test speed and environmental realism as separate concerns. The standard `dotnet test` loop used deterministic in-process checks without requiring Docker, while a real PostgreSQL smoke check remained an explicit additional validation step. This did not establish comprehensive database behavior; it established a sensible foundation for adding those tests when persistence arrived.
 
-- the Domain project stays independent of persistence and web concerns;
-- Application is positioned to coordinate use cases;
-- Infrastructure owns external and persistence-facing implementations;
-- API remains the HTTP/composition boundary.
+Docker Compose provided a local database with loopback-only host exposure, a persistent volume, and a health check. GitHub Actions validated restore/build/test. Those operational choices were intentionally modest rather than attempts to simulate an entire cloud deployment.
 
-This gives later domain and persistence work a clear place to live without requiring a distributed-services architecture.
+### Implementation exposed gaps in the AI-assisted workflow
 
-### Treat liveness and readiness as different operational signals
+Phase 0's workflow was a design until it met real branches, credentials, approval controls, and Windows development constraints. Early runs exposed excessive context loading, Git-state ambiguity, and friction around commits, pushes, and draft-PR creation.
 
-SquadSync exposes separate health concepts:
+The response was to tighten task boundaries and startup checks, not grant unrestricted tool permissions or add speculative automation. GitHub issues became the scoped execution contract; Codex performed bounded implementation; the PR was the handoff; I retained architecture acceptance and merge authority.
 
-- `/health` answers whether the API process is alive;
-- `/health/ready` answers whether PostgreSQL is available for work that depends on it.
+That was a useful lesson about integration boundaries beyond application code: development tools have operational constraints of their own, and those constraints should be handled where they occur rather than leaking into the software architecture.
 
-That distinction matters in production-style systems. A process can be alive while a dependency is unavailable, and operational tooling should be able to tell the difference.
+## Why It Matters
 
-The readiness behavior was verified across database availability, failure, and recovery while keeping liveness independent of PostgreSQL.
+Phase 1 demonstrated that a professional baseline is not just a successful scaffold. It requires explicit dependency direction, useful health semantics, proportionate validation, and a development process that survives real execution. The phase also clarified an ongoing judgment call: foundational rigor is valuable only if it continues to support delivery of actual features.
 
-### Keep the normal test loop independent of Docker
-
-The automated test baseline does not require developers or CI runners to start PostgreSQL just to run `dotnet test`.
-
-In-process integration tests verify API health behavior and the unavailable-database path with controlled configuration. A real PostgreSQL smoke check remains a separate validation concern.
-
-This keeps the everyday feedback loop fast and deterministic while preserving a place for environment-backed validation when it provides additional value.
-
-### Introduce PostgreSQL without introducing persistence prematurely
-
-Docker Compose now provides a local PostgreSQL service with loopback-only host exposure, a health check, and a persistent named volume.
-
-What Phase 1 deliberately did **not** add is equally important:
-
-- no EF Core `DbContext`;
-- no domain tables;
-- no migrations;
-- no seed data;
-- no production database architecture.
-
-Those belong to Phase 2, where persistence can be designed around the domain model instead of allowing the database structure to drive the model.
-
-### Use CI as a baseline quality gate, not as a complexity target
-
-GitHub Actions performs the core restore, build, and test sequence for the API solution.
-
-A third Phase 1 sprint for generic “CI/build/test hardening” had been listed as a roadmap example, but it was not created simply to satisfy the plan. Once the actual Phase 1 completion criteria were met, the project moved forward instead of adding process for its own sake.
-
-A more involved local PostgreSQL/API smoke-validation script remains backlog work and can be reconsidered when real persistence makes repeated database-backed validation more valuable.
-
-## Trade-offs
-
-### Foundation depth vs. visible feature progress
-
-Phase 1 still does not give a coach a team-management feature to use. The trade-off was intentional: establish compilation, testing, dependency boundaries, database connectivity, and operational checks before attaching product behavior to them.
-
-The cost is slower visible feature progress. The benefit is that Phase 2 can focus on domain behavior instead of simultaneously repairing foundational concerns.
-
-### Fast CI vs. full environment realism
-
-Keeping ordinary tests Docker-independent means CI does not currently prove the complete live PostgreSQL lifecycle on every run.
-
-That is acceptable at this stage because the database boundary is still connectivity-only. If persistence behavior becomes central, the validation strategy can evolve with evidence rather than assuming every environment-dependent check belongs in the baseline pipeline.
-
-### Structured AI workflow vs. process overhead
-
-The repository-owned workflow improved repeatability, but real use showed that too much context or overly rigid tool guidance can create friction of its own.
-
-The response was to simplify the startup path and make the issue the executable source of truth, rather than adding more documents or giving the implementation agent unrestricted access.
-
-## What Changed / What I Learned
-
-### The project became executable
-
-Phase 1 produced the first working application foundation:
-
-- .NET 10 ASP.NET Core solution;
-- modular project boundaries;
-- unit and integration test projects;
-- GitHub Actions restore/build/test validation;
-- development Swagger;
-- API liveness and PostgreSQL-backed readiness checks;
-- local PostgreSQL through Docker Compose;
-- documented local database and health-check workflows.
-
-This turns the architecture from a proposal into something that can now support real domain behavior.
-
-### Operational semantics are part of application design
-
-The health-check work reinforced that “the app is running” and “the app can serve dependency-backed work” are different states.
-
-That distinction maps directly to container orchestration, deployment health checks, and cloud operations later, but it was useful to model locally before any cloud platform was introduced.
-
-### Good boundaries make deferral easier
-
-Because persistence responsibilities were kept out of the Domain layer and Phase 1 stopped at connectivity, EF Core can be introduced in Phase 2 as an implementation detail rather than a redesign.
-
-A useful architecture is not only one that supports new work; it also makes it clear what **not** to build yet.
-
-### Agentic workflow needs empirical validation
-
-The Phase 0 workflow looked reasonable on paper, but actual Codex runs exposed several issues:
-
-- agents could load too much project context before retrieving the active issue;
-- Git state and branch creation needed to be explicit pre-edit invariants;
-- commit, push, and draft-PR creation needed to be part of the normal handoff definition;
-- Windows sandbox restrictions could block Git metadata or authenticated transport even when host credentials were healthy.
-
-The durable correction was not to weaken security globally. Tool-specific guidance now uses supported approval/escalation for understood operations while preserving normal workspace sandboxing and human merge authority.
-
-This was an important systems lesson: developer tooling is itself an integration boundary. Failures should be isolated to that boundary instead of leaking into application architecture.
-
-## What Was Deferred / Open Questions
-
-Phase 2 will introduce the first real persistence model. That includes decisions around EF Core, `DbContext`, entity configuration, migrations, development seed data, and how the existing domain model should map to relational storage.
-
-Issue #72 remains open as deferred maintenance for automating the full local PostgreSQL/API smoke sequence. It should be reconsidered when database-backed validation becomes frequent enough that the manual workflow creates meaningful cost or risk.
-
-Authentication, frontend implementation, cloud deployment, event-driven notifications, and Soccer-Subber integration remain later-phase concerns.
-
-## Lessons Learned
-
-A few lessons from this phase are likely to remain useful beyond SquadSync:
-
-- **Architecture boundaries should earn their keep.** The modular structure is valuable because it constrains dependencies and makes future persistence easier to introduce, not because more projects are inherently better.
-- **Operational behavior should be explicit.** Liveness and readiness represent different system states and should not be collapsed into one health signal.
-- **Fast validation and realistic validation serve different purposes.** The baseline test loop should stay deterministic; heavier environment-backed checks should be added when they provide distinct evidence.
-- **Plans are guidance, not obligations.** An example sprint should disappear when its intended outcome has already been achieved.
-- **Automation should follow observed friction.** The project improved its AI-assisted workflow after real failures instead of speculatively adding hooks, brokers, or unrestricted permissions.
-- **Human review remains an architectural control.** AI can accelerate execution, but scope, architecture acceptance, and merge decisions remain deliberate human responsibilities.
-
-## Current Relevance
-
-For a technical reviewer, this phase demonstrates more than the ability to scaffold an API. It shows practical reasoning across application architecture, developer experience, integration boundaries, testing, CI, local infrastructure, and operational semantics.
-
-The work is relevant to backend, integration, cloud, systems analyst, solutions engineering, and architecture-oriented roles because it connects implementation details to broader engineering concerns:
-
-- dependency management and modular design;
-- PostgreSQL and containerized local infrastructure;
-- CI quality gates;
-- failure-aware health checks;
-- separation of deterministic tests from environment-backed validation;
-- incremental architecture and scope control;
-- secure, reviewable use of AI-assisted development tooling.
-
-The strongest signal from Phase 1 is the decision discipline around the implementation: establish enough foundation to support the next layer, validate it, record the lessons, and stop before unnecessary complexity becomes part of the system.
-
-## Next Steps
-
-The next project decision is Phase 2 planning for **Core Domain and Persistence**.
-
-The first Phase 2 sprint should identify the smallest useful persisted domain slice, reconcile it with the existing domain model, introduce EF Core without coupling the Domain layer to persistence, and define tests that demonstrate both domain behavior and persistence behavior.
-
-Future sprint numbering and the timing of Issue #72 should be decided during that planning work rather than inherited automatically from earlier roadmap examples.
+At Phase 1 closeout, the next meaningful test was domain persistence and a real application workflow, rather than further generic infrastructure hardening.
