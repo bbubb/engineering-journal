@@ -1,6 +1,6 @@
 # Legacy SquadSync — Initial Scope, Stack, and Infrastructure
 
-**Project Retrospective** · SquadSync · Private historical prototype · May 2026
+**Project Retrospective** · SquadSync · Earlier backend prototype · May 2026
 
 <details>
 <summary>Metadata & related work</summary>
@@ -9,7 +9,7 @@
 |---|---|
 | Status | Complete — retrospective |
 | Tags | aspnet-core, infrastructure, observability, scope-control |
-| Source basis | Private historical SquadSync C# prototype |
+| Source basis | Earlier SquadSync C# implementation |
 | Public follow-up | https://github.com/bbubb/squadsync |
 
 </details>
@@ -46,4 +46,4 @@ The historical project considered many entities and capabilities before one comp
 
 ## Why It Matters
 
-This prototype is a useful reference point for how my engineering judgment evolved: from investing broadly in infrastructure and flexibility toward asking which architectural decisions actually reduce risk for the next deliverable. The private code remains historical source material; the public SquadSync repository documents the narrower follow-up.
+This prototype is a useful reference point for how my engineering judgment evolved: from investing broadly in infrastructure and flexibility toward asking which architectural decisions actually reduce risk for the next deliverable. Those lessons inform the narrower, more deliberate implementation in the current SquadSync repository.
