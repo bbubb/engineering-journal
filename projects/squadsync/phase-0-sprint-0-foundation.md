@@ -16,9 +16,9 @@
 
 ## Summary
 
-Phase 0 reframed SquadSync from an earlier, more expansive private exploration into a public soccer-focused team management MVP. Before writing new application code, I defined the target workflow, repository structure, architecture boundaries, planning documents, and a reviewable implementation process.
+Phase 0 reframed SquadSync from an earlier, more expansive design into a public soccer-focused team management MVP. Before writing new application code, I defined the target workflow, repository structure, architecture boundaries, planning documents, and a reviewable implementation process.
 
-The difficult part was not choosing more technologies. It was deciding which architectural ideas were useful now and which belonged to a longer-term private exploration or a later phase.
+The difficult part was not choosing more technologies. It was deciding which architectural ideas were useful now and which belonged to a later phase.
 
 ## At a Glance
 
@@ -33,7 +33,7 @@ The difficult part was not choosing more technologies. It was deciding which arc
 
 The earlier SquadSync concept offered many possible directions. For the public rebuild, the highest-value starting point was a coach's concrete workflow rather than a generalized platform model.
 
-That reduced implementation risk and unnecessary exposure of the broader product exploration. It also made architecture easier to assess: a reviewer should be able to trace why each component exists. The trade-off was deliberately leaving compelling ideas out of the first delivery.
+That reduced implementation risk and the complexity inherited from the broader product vision. It also made architecture easier to assess: a reviewer should be able to trace why each component exists. The trade-off was deliberately leaving compelling ideas out of the first delivery.
 
 ### A modular monolith gave the project room to grow without distributed-system overhead
 
