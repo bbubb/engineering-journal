@@ -1,67 +1,50 @@
-# Soccer-Subber Explainable Lineup Engine
+# Soccer-Subber — Making Lineup Decisions Explainable
 
-## Entry Metadata
+**Project Retrospective** · Soccer-Subber · Early Python prototype · May 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | Soccer-Subber Explainable Lineup Engine |
-| Type | Project Retrospective |
-| Subject | Soccer-Subber |
-| Date | 2026-05-19 |
-| Status | Complete |
-| Phase | N/A |
-| Sprint | N/A |
-| Issue | N/A |
-| Tags | python, lineup-engine, explainability, service-boundaries, soccer |
-| Related Repo | bbubb/soccer-subber |
-| Related Work | Soccer-Subber lineup generation work |
+| Status | Complete — prototype retrospective |
+| Tags | python, lineup-planning, algorithms, explainability, soccer |
+| Related Work | Early Soccer-Subber prototype; [SquadSync](https://github.com/bbubb/squadsync) integration direction |
+
+</details>
 
 ## Summary
 
-Soccer-Subber is a Python application designed to assist with generating soccer lineups.
+Soccer-Subber began with a familiar coaching problem: planning lineups and substitutions while balancing player development, position preferences, playing time, and team continuity. I wanted to see how much of that judgment I could express as repeatable, inspectable software logic.
 
-The core engineering challenge was not simply assigning players to positions. It was balancing formation, player preferences, playtime, substitution intervals, continuity, and positional development in a way that could be logged, inspected, and eventually trusted by a coach.
+The Python prototype generated lineups across match intervals using a scoring approach. It was a useful working experiment, not yet a finished coaching tool or integrated service.
 
-## Context
+## At a Glance
 
-Soccer substitution planning involves competing priorities: fairness, player development, positional fit, fatigue, formation shape, goalkeeper handling, minimum playtime, maximum playtime, and continuity across intervals.
+- Modeled players, formations, game plans, and timed lineup intervals.
+- Built a scoring-based assignment routine that tracked minutes and positional history.
+- Learned why an explainable recommendation still needs tests and constraint checks before a coach can rely on it.
 
-The project explored explicit models such as formations, matches, intervals, lineups, players, teams, and game plans.
+## Key Themes / Reflections
 
-## Key Decisions
+### Coaching priorities became competing software rules
 
-### Used explicit scoring logic
+The difficult part was not filling positions; it was balancing fairness, preferred roles, continuity, and opportunities for players to develop in different areas of the field. The prototype modeled those inputs and generated a new assignment for each interval.
 
-The engine favored inspectable scoring logic instead of a black-box solver.
+Turning coaching judgment into explicit data and scoring rules made the trade-offs easier to inspect. It also exposed the limits of informal assumptions about what a "fair" lineup would look like.
 
-This makes the result easier to debug and explain, even if it may not always produce a mathematically global optimum.
+### Explainable scoring was useful, but not a guarantee
 
-### Modeled the game in intervals
+The algorithm scored player-position combinations, selected assignments greedily, tracked playing time and position history, and logged the reasoning behind scores. That made a recommendation easier to understand and troubleshoot than an opaque result.
 
-Youth soccer substitutions are often planned around time segments. Interval-based planning is practical and easier to reason about than fully continuous substitution logic.
+The trade-off is that a locally attractive assignment is not necessarily best for the entire match. Playing-time targets influenced scores but were not all enforced as hard constraints. A more dependable tool would need scenario-based tests, clearer distinction between requirements and preferences, and validation of the final schedule.
 
-### Tracked playtime and position history
+### A future service needs a clearer boundary
 
-Fairness, development, and continuity require memory of who played where and when.
+The prototype helped demonstrate that lineup recommendation logic could be treated separately from team and roster management. Moving toward SquadSync integration would require a defined input/output contract, stronger validation, and a testable service interface.
 
-### Preserved explainability as product value
+That remains an architectural direction rather than a capability of the historical script. The immediate value of the prototype was learning how to translate a real coaching problem into explainable, testable algorithmic decisions.
 
-A lineup tool is only useful if a coach can understand why a recommendation was made.
+## Why It Matters
 
-## Trade-offs
-
-Explicit heuristics are easier to explain and adjust, but they require careful testing and may miss some optimal combinations.
-
-A more advanced optimization model could be explored later, but the first valuable version should be deterministic, testable, and explainable.
-
-## Lessons Learned
-
-Explainability is part of the product, not a nice-to-have. A coach-facing decision tool must produce recommendations that can be inspected and trusted.
-
-## Current Relevance
-
-Soccer-Subber is planned as a separate service boundary for SquadSync rather than logic embedded directly inside the core platform.
-
-## Next Steps
-
-Refactor Soccer-Subber into a service-ready structure with clear input schema, validation, scoring strategy, assignment engine, result formatting, explanation metadata, and tests around known scenarios.
+Soccer-Subber connected my on-field experience with practical Python modeling and algorithm design. Its most durable lesson was that explainability helps a coach understand a recommendation, while reliability requires independently verifying that the recommendation respects the constraints that matter.

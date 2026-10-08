@@ -1,53 +1,51 @@
-# Cantrill Tech Fundamentals
+# Cantrill Tech Fundamentals — Connecting IT and Software Development to Cloud
 
-## Entry Metadata
+**Certification Note** · AWS foundations · May 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | Cantrill Tech Fundamentals |
-| Type | Certification Note |
-| Subject | AWS |
-| Date | 2026-05-19 |
-| Status | Complete |
-| Phase | N/A |
-| Sprint | N/A |
-| Issue | N/A |
-| Tags | aws, cloud, networking, security, infrastructure |
-| Related Repo | N/A |
-| Related Work | Adrian Cantrill Tech Fundamentals |
+| Status | Complete — fundamentals section |
+| Tags | networking, security, infrastructure, cloud, professional-development |
+| Related Work | Adrian Cantrill Tech Fundamentals; AWS SAA study path |
+
+</details>
 
 ## Summary
 
-This entry documents foundational cloud knowledge reinforced through Adrian Cantrill's Tech Fundamentals material.
+Adrian Cantrill's Tech Fundamentals was largely a structured review, not my first exposure to networking or systems. My background included enterprise IT support, security operations, infrastructure tools, software development, and local Linux/container work. The value was connecting that practical experience to clearer models of how systems communicate, protect data, recover from failures, and support cloud services.
 
-The course helped connect prior IT support specialist, networking, administrator, Linux/server exposure, containerized local environments, and software development experience to clearer cloud architecture concepts.
+It also helped me articulate the bridge between implementing applications and understanding the infrastructure and operational boundaries on which they depend.
 
-## Context
+## At a Glance
 
-The goal was to strengthen technical foundations before deeper AWS Solutions Architect Associate study.
+- Clarified network encapsulation and traffic flow beyond familiar IP addressing, routing, and subnetting.
+- Deepened my understanding of DNS, secure communication, key pairs, hashing, and digital signatures.
+- Connected banking IT security and continuity practices to formal concepts such as RPO and RTO.
+- Strengthened foundations for AWS architecture decisions without confusing service familiarity with design experience.
 
-Prior exposure included enterprise networking, switches, endpoint support, Active Directory, MFA workflows, VPNs, virtualization, backups, servers, serverless cloud, and full-stack software development.
+## Key Themes / Reflections
 
-## Key Ideas
+### Networking and security became a clearer end-to-end system
 
-Important concepts reinforced:
+I had worked with networks, VPNs, SSH, authentication, and administrative controls, but the course made it easier to trace traffic through physical links, Ethernet frames, routed packets, and transport protocols. Cryptography likewise became less of a list of tools: I better understood the distinct purposes of encryption, hashing, signatures, and key management.
 
-- networking layers and traffic flow;
-- routing and DNS;
-- public/private key cryptography;
-- hashing and digital signatures;
-- stateful versus stateless security;
-- redundancy and disaster recovery;
-- cloud infrastructure responsibility models.
+The distinction between stateful and stateless security controls also became clearer. These fundamentals matter in software development because API requests, service-to-service communication, and network security all depend on behaviors that are easier to troubleshoot when the underlying protocols make sense.
 
-## What I Learned
+### Enterprise operations connected to resilience and service ownership
 
-Cloud architecture depends heavily on foundational networking, security, and operations knowledge. AWS service knowledge matters, but it sits on top of those deeper principles.
+Banking IT exposed me to controlled access, directory services, MFA, monitoring, backup practices, and disaster-recovery environments. The course gave that operational experience a clearer vocabulary, especially the difference between recovery point and recovery time objectives.
 
-## Current Relevance
+The material connected redundancy and disaster recovery to broader questions of resilience. It also clarified public, private, and hybrid cloud; infrastructure, platform, and software service models; and the shared-responsibility model. Those distinctions help explain who owns which operational and security responsibilities, rather than simply where a system is hosted.
 
-This supports the AWS SAA → DVA → AIF path and gives stronger grounding for later SquadSync cloud decisions.
+### Cloud integration should follow application needs
 
-## Next Steps
+My software development experience helps me reason about APIs, dependencies, deployments, and modularity without tying every application decision to AWS. SquadSync and Soccer-Subber can establish their domain logic and service contracts locally before selecting hosting, persistence, eventing, and monitoring services.
 
-Continue AWS SAA coursework and connect major AWS concepts back to practical SquadSync or Soccer-Subber architecture choices.
+I want to use the deeper AWS coursework to evaluate those choices on security, reliability, operations, and cost—not merely to attach cloud services to a portfolio project.
+
+## Why It Matters
+
+The fundamentals section helped connect hands-on IT operations and software development into a more deliberate systems-architecture learning path. It provided a foundation for AWS Solutions Architect Associate study while reinforcing that practical architecture starts with sound networking, security, and software boundaries.

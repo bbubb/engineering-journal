@@ -1,65 +1,49 @@
-# Legacy SquadSync Initial Scope, Stack, and Infrastructure
+# Legacy SquadSync — Initial Scope, Stack, and Infrastructure
 
-## Entry Metadata
+**Project Retrospective** · SquadSync · Earlier backend prototype · May 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | Legacy SquadSync Initial Scope, Stack, and Infrastructure |
-| Type | Project Retrospective |
-| Subject | SquadSync |
-| Date | 2026-05-19 |
-| Status | Complete |
-| Phase | N/A |
-| Sprint | N/A |
-| Issue | N/A |
-| Tags | legacy-architecture, aspnet-core, infrastructure, observability, mvp-scope |
-| Related Repo | bbubb/squadsync_csharp |
-| Related Work | Archived SquadSync C# implementation |
+| Status | Complete — retrospective |
+| Tags | aspnet-core, infrastructure, observability, scope-control |
+| Source basis | Earlier SquadSync C# implementation |
+| Public follow-up | https://github.com/bbubb/squadsync |
+
+</details>
 
 ## Summary
 
-The earlier SquadSync implementation began as a soccer tactical management system for coaches, managers, players, and parents. It moved beyond a simple CRUD prototype by establishing a layered ASP.NET Core backend, MySQL persistence, DTO boundaries, API versioning, centralized middleware, and structured logging.
+The earlier SquadSync prototype was a soccer tactical-management application for coaches, managers, players, and parents. It used a layered ASP.NET Core backend with MySQL, DTOs, services and repositories, API versioning, exception handling, and structured logging.
 
-The main architectural tension was balancing a long-term platform vision against the need for a clear, buildable MVP.
+That work gave me experience building a realistic backend foundation. In retrospect, it also exposed a tension between designing for a broad platform and delivering a small, usable product.
 
-## Context
+## At a Glance
 
-The product idea had immediate domain complexity: users, teams, coaches, players, parents, roles, communication, and tactical planning.
+- Built an early layered API backed by relational persistence.
+- Introduced observability with Serilog, Seq, and correlation IDs.
+- Learned that technically reasonable foundations can still outpace validated product scope.
 
-Even at the early stage, the backend needed enough structure to support future expansion without becoming too abstract too soon. The implementation used controllers, models, repositories, DTOs, middleware, services, utilities, and tests rather than a single controller-heavy prototype.
+## Key Themes / Reflections
 
-## Key Decisions
+### Structure improved separation but came with an upfront cost
 
-### Used a layered ASP.NET Core backend
+Controllers, services, repositories, DTOs, and persistence responsibilities were separated rather than concentrated in endpoints. MySQL and EF Core made entity relationships and migrations part of the design. These choices helped me reason about responsibilities, but also increased the amount of code and configuration needed before a coach-facing workflow was usable.
 
-The layered structure separated controller concerns, service logic, repository access, DTO mapping, and persistence concerns.
+The lasting lesson was not that every small application needs several layers. It was that boundaries should make a concrete change easier to understand or test.
 
-This increased upfront structure but made the codebase more realistic and easier to reason about as the domain grew.
+### Observability was a useful early investment
 
-### Used MySQL with Entity Framework Core
+Serilog and Seq offered structured visibility into application behavior. Correlation-ID and exception middleware addressed the reality that failures can cross several processing steps before surfacing in an API response.
 
-Relational persistence made the app behave more like a real multi-entity backend instead of a demo-only prototype.
+Unlike speculative platform abstractions, this was a practical concern even in a small system: tracing a request through the backend is valuable long before cloud deployment. API versioning, by contrast, introduced complexity before multiple public API versions were necessary.
 
-The trade-off was more setup complexity around migrations, configuration, and relational modeling.
+### Product scope mattered more than architectural breadth
 
-### Added observability early
+The historical project considered many entities and capabilities before one complete user workflow had been established. The subsequent public rebuild kept the lessons of layering and observability while narrowing its initial feature set and simplifying the domain.
 
-Serilog, Seq, correlation IDs, and exception middleware were added early because debugging matters once requests cross controller, service, repository, and database boundaries.
+## Why It Matters
 
-### Added API versioning early
-
-API versioning reflected the long-term platform concept, but it also added complexity before multiple client versions existed.
-
-## Lessons Learned
-
-The biggest lesson was that architecture should support the next real workflow, not every possible future workflow.
-
-The early infrastructure choices were directionally strong: layered backend, relational persistence, logging, middleware, and versioned APIs. The scope, however, needed to narrow around a concrete vertical slice.
-
-## Current Relevance
-
-This legacy work informed the current SquadSync rebuild. The new public version keeps the seriousness of the earlier architecture but narrows scope around a cleaner MVP and more deliberate repo-owned workflow.
-
-## Next Steps
-
-Use the current SquadSync rebuild to prove one focused vertical slice before reintroducing broader platform features.
+This prototype is a useful reference point for how my engineering judgment evolved: from investing broadly in infrastructure and flexibility toward asking which architectural decisions actually reduce risk for the next deliverable. Those lessons inform the narrower, more deliberate implementation in the current SquadSync repository.

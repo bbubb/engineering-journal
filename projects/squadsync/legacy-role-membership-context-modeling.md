@@ -1,69 +1,45 @@
-# Legacy SquadSync Role, Membership, and Context Modeling
+# Legacy SquadSync — Modeling Roles in Context
 
-## Entry Metadata
+**Architecture Reflection** · SquadSync · Earlier domain-model exploration · May 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | Legacy SquadSync Role, Membership, and Context Modeling |
-| Type | Architecture Reflection |
-| Subject | SquadSync |
-| Date | 2026-05-19 |
-| Status | Complete |
-| Phase | N/A |
-| Sprint | N/A |
-| Issue | N/A |
-| Tags | domain-modeling, authorization, membership, roles, mvp-scope |
-| Related Repo | bbubb/squadsync_csharp |
-| Related Work | Archived SquadSync C# implementation |
+| Status | Complete — retrospective |
+| Tags | domain-modeling, membership, authorization, scope-control |
+| Source basis | Earlier SquadSync domain-model work and design discussions |
+| Public follow-up | https://github.com/bbubb/squadsync |
+
+</details>
 
 ## Summary
 
-One of the hardest SquadSync design problems was separating identity from responsibility. A user is not always just a player, coach, parent, or admin. The same person can hold different roles in different team or organization contexts.
+An early SquadSync design challenge was separating a person's identity from responsibilities that change across teams and organizations. A global label such as “coach” or “player” could not adequately describe someone who participated in more than one context.
 
-The earlier implementation explored this by modeling role-bearing entities, organizational units, role requests, and permissions.
+The earlier design explored a generalized role-bearing approach, alongside organizational context, role requests, and permissions. The most durable lesson was not the abstraction itself: it was recognizing that a **relationship can carry business meaning and rules** without becoming a permanent attribute of a person.
 
-## Context
+## At a Glance
 
-The domain pushed beyond simple user roles. A basic enum-style role system would not be enough if a user could be a coach for one team, a parent for another, and an admin in a specific organization context.
+- Explored contextual responsibilities rather than treating roles as global user properties.
+- Encountered the cost of modeling extensibility before a narrow workflow existed.
+- Carried the relationship-first insight into the simpler public MVP model.
 
-The deeper question was how much of that complexity belonged in the first public MVP.
+## Key Themes / Reflections
 
-## Key Decisions
+### A role needs a context
 
-### Explored shared role-bearing abstractions
+The question “what role does this user have?” is incomplete without “for which team or organization?” A person can participate in distinct settings without having a different fundamental identity in each.
 
-The earlier model explored an `IRoleBearer` style abstraction so more than one type of entity could carry roles.
+The historical design explored how to represent that flexibility, including role assignment and approval concepts. It was useful domain exploration, but also introduced more persistence and authorization complexity than the initial soccer workflow could justify.
 
-This increased flexibility but introduced persistence and relationship complexity.
+### Explicit membership was a better MVP boundary
 
-### Scoped roles to context
+The public SquadSync rebuild deliberately narrowed the problem to `User`, `Team`, and `TeamMembership` with a constrained `TeamRole`. It also distinguishes person-level `PlayerProfile` data from team-specific `RosterEntry` data. Those decisions preserve the important domain distinction while avoiding a generalized authorization framework.
 
-Roles were treated as contextual rather than global. A responsibility only makes sense in relation to a team, organization, or other bounded context.
+What changed in my judgment was where to place extensibility: first define the relationship and lifecycle the product actually needs, then expand only when another concrete workflow demonstrates the need. Flexibility has a real cost in schema design, validation, and testability.
 
-This was more accurate, but it required more careful modeling.
+## Why It Matters
 
-### Modeled role requests and permissions separately
-
-Role requests created a path for approval/status workflows. Separate permissions created a path for more granular authorization.
-
-Both were useful but likely too heavy for the first public MVP slice.
-
-## Trade-offs
-
-The deeper model was architecturally interesting but risked distracting from the first usable vertical slice.
-
-The current rebuild should favor explicit `User`, `Team`, `Membership`, and role assignment concepts first. Deeper polymorphic role-bearing abstractions can remain a private or later-stage design exploration.
-
-## Lessons Learned
-
-Access control is not simply `user has role`. It is contextual: a user has a responsibility in relation to a team, organization, activity, or platform scope.
-
-The MVP should preserve that insight without overbuilding the generalized authorization model too early.
-
-## Current Relevance
-
-This entry informs the current SquadSync domain model and helps explain why the public MVP should prefer clear membership modeling over broad abstraction.
-
-## Next Steps
-
-Use the current domain model to implement the immediate membership and role needs first. Revisit broader authorization patterns only after the MVP workflow is stable.
+This was an early example of moving from theoretically broad domain modeling toward explicit, verifiable product behavior. That shift—from modeling broad possible relationships to implementing the relationships a coach actually needs—continues to guide how I approach domain scope.
