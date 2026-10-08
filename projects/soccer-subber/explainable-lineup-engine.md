@@ -1,6 +1,6 @@
-# Soccer-Subber — Formalizing Soccer Constraints as Explainable Logic
+# Soccer-Subber — Explainable Lineup Planning
 
-**Project Retrospective** · Soccer-Subber · Historical Python prototype · May 2026
+**Project Retrospective** · Soccer-Subber · Python prototype · May 2026
 
 <details>
 <summary>Metadata & related work</summary>
@@ -8,44 +8,38 @@
 | Field | Value |
 |---|---|
 | Status | Complete — prototype retrospective |
-| Tags | python, algorithms, lineup-planning, explainability, domain-modeling |
-| Source basis | Private historical Soccer-Subber Python prototype |
-| Public follow-up | Planned service-ready integration boundary in https://github.com/bbubb/squadsync |
+| Tags | python, lineup-planning, heuristics, explainability, soccer |
+| Source basis | Earlier Soccer-Subber Python prototype |
+| Related Work | Future lineup-assistance integration with https://github.com/bbubb/squadsync |
 
 </details>
 
 ## Summary
 
-Soccer-Subber began as a Python prototype for helping coaches generate soccer lineups and substitution plans. Its challenge was to translate coaching priorities—formation shape, positional fit, playing-time goals, and rotation—into explicit rules an algorithm could evaluate.
+I started Soccer-Subber to make youth soccer lineup and substitution planning more manageable. The challenge was not simply filling positions; it was balancing formations, player preferences, playing-time goals, rotation, and development while keeping the recommendations understandable to a coach.
 
-The historical code used a deterministic greedy scoring-and-assignment approach over time intervals, tracked player minutes and position history, and logged scores behind recommendations. It was a working experiment, not yet a validated, API-ready service.
+The Python prototype generated interval-based lineups using inspectable scoring rules. It became a practical exercise in translating coaching judgment into an algorithm—and recognizing where a plausible recommendation is not necessarily a fair or optimal one.
 
 ## At a Glance
 
-- Translated competing coaching goals into data models and inspectable assignment criteria.
-- Implemented interval-based greedy assignment with player/position scoring and playtime tracking.
-- Learned that an understandable recommendation is not the same as a guaranteed fair or globally optimal plan.
+- Modeled players, formations, game plans, and match intervals.
+- Generated lineups using player-position scores and tracked minutes and position history.
+- Used logging to make recommendations easier to inspect and troubleshoot.
 
 ## Key Themes / Reflections
 
-### Formalizing coaching judgment exposed competing constraints
+### Coaching decisions became explicit trade-offs
 
-A coach must consider more than filling every position. Players may have preferred positions, playing-time limits or targets, developmental needs, and continuity from one interval to the next.
+The algorithm considered preferred positions, playing-time targets, substitution rotation, continuity, and opportunities to play different roles. Turning those priorities into scoring rules made their interactions easier to examine than they had been when planning substitutions informally.
 
-The prototype represented formations, players, game plans, and intervals, then evaluated candidate assignments against several competing factors. That was a useful exercise in moving from informal domain judgment to software behavior. It also showed how quickly a scoring rule can produce trade-offs that are difficult to reason about informally.
+The trade-off was that improving one outcome could affect another. A lineup that made sense in one interval did not automatically produce the best balance over the whole match.
 
-### Greedy assignment made decisions inspectable, not automatically correct
+### Explainability mattered as much as the recommendation
 
-The prototype ranked player-position candidates and assigned available pairs while tracking playing time. Logs exposed score contributions and resulting assignments, making it possible to inspect why a particular choice was made.
+The prototype ranked player-position options, assigned available players greedily, and logged how scores contributed to the choices. That made it possible to investigate *why* a lineup was suggested.
 
-The important limitation is that greedy local choices do not guarantee global optimality or satisfaction of every soft playing-time target. This distinction motivates scenario-based tests and explicit validation of hard constraints. Explainability improves trust only if the explanation accurately describes what the engine did.
-
-### A service boundary requires more than a functioning script
-
-The original prototype combined scoring, assignment, logging, and presentation concerns more closely than an API-oriented service should. A future bounded service would need validated input contracts, clear separation of algorithm components, deterministic result shapes, meaningful failure handling, and repeatable tests.
-
-That direction is related to SquadSync's planned lineup-suggestion interface, but integration and cloud deployment should not be mistaken for completed historical work.
+It also exposed a limitation: scoring playing-time goals does not guarantee they will be met, and locally sensible assignments are not necessarily globally optimal. A coach-facing tool needs both inspectable decisions and stronger scenario-based validation before its recommendations can be relied on.
 
 ## Why It Matters
 
-Soccer-Subber demonstrates my effort to turn deep domain familiarity into testable software decisions, including their limitations. The journal preserves the algorithmic reasoning at a conceptual level; the historical prototype remains private, without publishing detailed scoring weights or proprietary extensions.
+Soccer-Subber connected my coaching experience to algorithm design and software modeling. The lasting lesson was that explainability is part of the product, not an optional feature. The prototype also established a useful starting point for a future bounded lineup-assistance service, where I can explore API integration and cloud deployment without expanding SquadSync's core responsibilities prematurely.
