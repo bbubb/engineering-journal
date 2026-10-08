@@ -1,67 +1,51 @@
-# Soccer-Subber Explainable Lineup Engine
+# Soccer-Subber — Formalizing Soccer Constraints as Explainable Logic
 
-## Entry Metadata
+**Project Retrospective** · Soccer-Subber · Historical Python prototype · May 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | Soccer-Subber Explainable Lineup Engine |
-| Type | Project Retrospective |
-| Subject | Soccer-Subber |
-| Date | 2026-05-19 |
-| Status | Complete |
-| Phase | N/A |
-| Sprint | N/A |
-| Issue | N/A |
-| Tags | python, lineup-engine, explainability, service-boundaries, soccer |
-| Related Repo | bbubb/soccer-subber |
-| Related Work | Soccer-Subber lineup generation work |
+| Status | Complete — prototype retrospective |
+| Tags | python, algorithms, lineup-planning, explainability, domain-modeling |
+| Source basis | Private historical Soccer-Subber Python prototype |
+| Public follow-up | Planned service-ready integration boundary in https://github.com/bbubb/squadsync |
+
+</details>
 
 ## Summary
 
-Soccer-Subber is a Python application designed to assist with generating soccer lineups.
+Soccer-Subber began as a Python prototype for helping coaches generate soccer lineups and substitution plans. Its challenge was to translate coaching priorities—formation shape, positional fit, playing-time goals, and rotation—into explicit rules an algorithm could evaluate.
 
-The core engineering challenge was not simply assigning players to positions. It was balancing formation, player preferences, playtime, substitution intervals, continuity, and positional development in a way that could be logged, inspected, and eventually trusted by a coach.
+The historical code used a deterministic greedy scoring-and-assignment approach over time intervals, tracked player minutes and position history, and logged scores behind recommendations. It was a working experiment, not yet a validated, API-ready service.
 
-## Context
+## At a Glance
 
-Soccer substitution planning involves competing priorities: fairness, player development, positional fit, fatigue, formation shape, goalkeeper handling, minimum playtime, maximum playtime, and continuity across intervals.
+- Translated competing coaching goals into data models and inspectable assignment criteria.
+- Implemented interval-based greedy assignment with player/position scoring and playtime tracking.
+- Learned that an understandable recommendation is not the same as a guaranteed fair or globally optimal plan.
 
-The project explored explicit models such as formations, matches, intervals, lineups, players, teams, and game plans.
+## Key Themes / Reflections
 
-## Key Decisions
+### Formalizing coaching judgment exposed competing constraints
 
-### Used explicit scoring logic
+A coach must consider more than filling every position. Players may have preferred positions, playing-time limits or targets, developmental needs, and continuity from one interval to the next.
 
-The engine favored inspectable scoring logic instead of a black-box solver.
+The prototype represented formations, players, game plans, and intervals, then evaluated candidate assignments against several competing factors. That was a useful exercise in moving from informal domain judgment to software behavior. It also showed how quickly a scoring rule can produce trade-offs that are difficult to reason about informally.
 
-This makes the result easier to debug and explain, even if it may not always produce a mathematically global optimum.
+### Greedy assignment made decisions inspectable, not automatically correct
 
-### Modeled the game in intervals
+The prototype ranked player-position candidates and assigned available pairs while tracking playing time. Logs exposed score contributions and resulting assignments, making it possible to inspect why a particular choice was made.
 
-Youth soccer substitutions are often planned around time segments. Interval-based planning is practical and easier to reason about than fully continuous substitution logic.
+The important limitation is that greedy local choices do not guarantee global optimality or satisfaction of every soft playing-time target. This distinction motivates scenario-based tests and explicit validation of hard constraints. Explainability improves trust only if the explanation accurately describes what the engine did.
 
-### Tracked playtime and position history
+### A service boundary requires more than a functioning script
 
-Fairness, development, and continuity require memory of who played where and when.
+The original prototype combined scoring, assignment, logging, and presentation concerns more closely than an API-oriented service should. A future bounded service would need validated input contracts, clear separation of algorithm components, deterministic result shapes, meaningful failure handling, and repeatable tests.
 
-### Preserved explainability as product value
+That direction is related to SquadSync's planned lineup-suggestion interface, but integration and cloud deployment should not be mistaken for completed historical work.
 
-A lineup tool is only useful if a coach can understand why a recommendation was made.
+## Why It Matters
 
-## Trade-offs
-
-Explicit heuristics are easier to explain and adjust, but they require careful testing and may miss some optimal combinations.
-
-A more advanced optimization model could be explored later, but the first valuable version should be deterministic, testable, and explainable.
-
-## Lessons Learned
-
-Explainability is part of the product, not a nice-to-have. A coach-facing decision tool must produce recommendations that can be inspected and trusted.
-
-## Current Relevance
-
-Soccer-Subber is planned as a separate service boundary for SquadSync rather than logic embedded directly inside the core platform.
-
-## Next Steps
-
-Refactor Soccer-Subber into a service-ready structure with clear input schema, validation, scoring strategy, assignment engine, result formatting, explanation metadata, and tests around known scenarios.
+Soccer-Subber demonstrates my effort to turn deep domain familiarity into testable software decisions, including their limitations. The journal preserves the algorithmic reasoning at a conceptual level; the historical prototype remains private, without publishing detailed scoring weights or proprietary extensions.
