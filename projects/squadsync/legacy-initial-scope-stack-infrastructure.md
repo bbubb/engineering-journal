@@ -42,7 +42,7 @@ Even a small backend benefits from being able to trace a request through its lay
 
 ### The next coach workflow mattered more than future features
 
-The historical project considered many entities and capabilities before one complete user workflow had been established. The subsequent public rebuild kept the lessons of layering and observability while narrowing its initial feature set and simplifying the domain.
+The historical project considered many entities and capabilities before one complete coach-facing workflow had been established. The subsequent public rebuild kept the lessons of layering and observability while narrowing its initial feature set and simplifying the domain.
 
 ## Significance
 
