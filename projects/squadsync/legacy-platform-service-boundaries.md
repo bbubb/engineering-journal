@@ -1,4 +1,4 @@
-# Legacy SquadSync — Deciding Where Specialized Logic Belongs
+# Legacy SquadSync — Service Boundaries: Separating Team Data from Lineup Logic
 
 **Architecture Reflection** · SquadSync · Historical design exploration · May 2026
 
@@ -16,30 +16,30 @@
 
 ## Summary
 
-As the early SquadSync concept expanded, one recurring question was whether specialized lineup and substitution planning belonged inside the team-management application. The design direction separated durable team and match data from algorithmic lineup assistance, with Soccer-Subber as a distinct integration candidate.
+As the early SquadSync concept expanded, one recurring question was whether specialized lineup and substitution planning belonged inside the team-management application. The plan was for SquadSync to store team, roster, and match data while Soccer-Subber calculated suggested lineups.
 
-The result was a clear architectural direction: define the boundary first and introduce remote integration only when it serves a working product.
+I wanted to define which application owned each responsibility before deciding whether they needed to communicate over a network.
 
-## At a Glance
+## Key Outcomes
 
 - Distinguished core team-management responsibilities from specialized recommendation logic.
-- Chose explicit integration boundaries while preserving a modular-monolith core.
+- Kept SquadSync as a modular monolith while planning a separate interface for lineup suggestions.
 - Deferred remote services, notifications, and AI explanations until a usable workflow justified them.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
-### Responsibility matters more than the number of deployed services
+### Team data and lineup suggestions have different owners
 
-SquadSync needs to own team, membership, roster, match, and lineup state. Soccer-Subber is concerned with suggesting assignments under soccer-specific constraints. That difference provides a useful contract boundary even before both applications are deployed separately.
+SquadSync needs to own team, membership, roster, match, and lineup state. Soccer-Subber is concerned with suggesting assignments under soccer-specific constraints. That distinction is useful even before the two applications run as separately deployed services.
 
-Separating this specialized logic made sense for the product, but it also created an opportunity to develop integration and cloud-engineering skills. I wanted to explore APIs, service contracts, and eventually AWS deployment patterns through a meaningful component, rather than add cloud services to SquadSync without a reason. The lesson was to establish a useful boundary first; independent deployment and distributed infrastructure still need to justify their operational cost.
+Separating this specialized logic made sense for the product, but it also created an opportunity to develop integration and cloud-engineering skills. I wanted to explore APIs, service contracts, and eventually AWS deployment patterns through a meaningful component, rather than add cloud services to SquadSync without a reason. I learned to define the interface first, then decide whether a separate deployment is worth the cost of network calls, failures, and operations.
 
-### Future integration should not dictate the first implementation
+### A separate code boundary did not require a deployed microservice
 
-A narrow request/response contract can isolate suggestion logic from the core platform without prematurely committing to a cloud provider or communication mechanism. Reactive notifications and optional AI explanations could follow after the core workflow and integration contract were proven.
+A small request/response contract would let SquadSync ask for a lineup suggestion without giving Soccer-Subber direct access to its database. I did not need to choose AWS services or event infrastructure to define that boundary. Reactive notifications and optional AI explanations could follow after the core workflow and integration contract were proven.
 
-The trade-off is that a bounded interface leaves some integration decisions unresolved. That is preferable to paying the complexity cost of distributed behavior before the coach-facing experience works.
+This left deployment and failure-handling details for later, but avoided building a distributed system before the coach-facing workflow existed.
 
-## Why It Matters
+## Significance
 
-The lasting principle is to make ownership explicit and introduce infrastructure deliberately. A bounded Soccer-Subber integration could both preserve a simpler SquadSync core and provide practical experience with APIs, cloud deployment, failure handling, and cost-aware system design.
+I learned to separate responsibilities in code first, then add network calls or cloud services when the working product needs them. Soccer-Subber can still provide meaningful API and cloud-integration experience without making SquadSync itself a distributed system too early.
