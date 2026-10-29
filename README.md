@@ -4,13 +4,13 @@ This repository documents technical growth across full-stack development, system
 
 The journal serves two related purposes: preserving a durable record of what I have built and learned, and presenting that work as a clear, credible public professional artifact.
 
-Entries should work at two reading depths. A broad reader should be able to skim the summary, key outcomes, theme headings, and relevance without needing deep technical context. A technical reader should be able to continue into self-contained themes that combine the relevant decisions, trade-offs, reflection, and implementation evidence.
+Entries should work at two reading depths. A broad reader should be able to skim the Summary, Key Outcomes (or Key Insights), descriptive theme headings, and Significance without needing deep technical context. A technical reader should be able to continue into self-contained themes that combine the relevant decisions, trade-offs, reflection, and implementation evidence.
 
 The journal is therefore neither a project changelog nor a replacement for repository documentation. It captures selected technical context, decisions, mistakes, uncertainties, and lessons when they help explain growth or preserve useful knowledge. Detailed implementation evidence belongs in the linked repositories, issues, PRs, and project documentation.
 
 ## Focus Areas
 
-- SquadSync: full-stack team and competition management platform
+- SquadSync: soccer-focused team and roster management and match-planning MVP
 - Soccer-Subber: explainable lineup and substitution decision engine
 - TeamTracker: serverless event and notification proof of concept
 - AWS certification path: SAA → DVA → AIF
@@ -38,19 +38,19 @@ The entry metadata identifies the format, such as project retrospective, technic
 
 - [Phase 2 Core Domain, Persistence, and Application Boundary](projects/squadsync/phase-2-core-domain-persistence-and-application-boundary.md)
 - [Phase 1 API Foundation and Workflow Validation](projects/squadsync/phase-1-api-foundation-and-workflow-validation.md)
-- [Phase 0 Sprint 0 Foundation](projects/squadsync/phase-0-sprint-0-foundation.md)
-- [Phase 0 Sprint 0 Agentic Harness Engineering](projects/squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
+- [Phase 0 Foundation — Finding a Buildable MVP Boundary](projects/squadsync/phase-0-sprint-0-foundation.md)
+- [Phase 0 Agentic Harness — Designing an AI-Assisted Workflow](projects/squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
 - [Legacy Initial Scope, Stack, and Infrastructure](projects/squadsync/legacy-initial-scope-stack-infrastructure.md)
-- [Legacy Role, Membership, and Context Modeling](projects/squadsync/legacy-role-membership-context-modeling.md)
-- [Legacy Platform and Service Boundaries](projects/squadsync/legacy-platform-service-boundaries.md)
+- [Legacy Role and Membership Modeling in Context](projects/squadsync/legacy-role-membership-context-modeling.md)
+- [Legacy Service Boundaries — Separating Team Data from Lineup Logic](projects/squadsync/legacy-platform-service-boundaries.md)
 
 ### Soccer-Subber
 
-- [Explainable Lineup Engine](projects/soccer-subber/explainable-lineup-engine.md)
+- [Making Lineup Decisions Explainable](projects/soccer-subber/explainable-lineup-engine.md)
 
 ### AWS
 
-- [Cantrill Tech Fundamentals](topics/aws/cantrill-tech-fundamentals.md)
+- [Cantrill Tech Fundamentals — Connecting IT and Software Development to Cloud](topics/aws/cantrill-tech-fundamentals.md)
 
 ## Indexes
 

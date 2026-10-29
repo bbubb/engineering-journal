@@ -22,15 +22,15 @@ Use phase and sprint together when both are known and useful for project navigat
 
 - [Phase 2 Core Domain, Persistence, and Application Boundary](squadsync/phase-2-core-domain-persistence-and-application-boundary.md)
 - [Phase 1 API Foundation and Workflow Validation](squadsync/phase-1-api-foundation-and-workflow-validation.md)
-- [Phase 0 Sprint 0 Foundation](squadsync/phase-0-sprint-0-foundation.md)
-- [Phase 0 Sprint 0 Agentic Harness Engineering](squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
+- [Phase 0 Foundation — Finding a Buildable MVP Boundary](squadsync/phase-0-sprint-0-foundation.md)
+- [Phase 0 Agentic Harness — Designing an AI-Assisted Workflow](squadsync/phase-0-sprint-0-agentic-harness-engineering.md)
 - [Legacy Initial Scope, Stack, and Infrastructure](squadsync/legacy-initial-scope-stack-infrastructure.md)
-- [Legacy Role, Membership, and Context Modeling](squadsync/legacy-role-membership-context-modeling.md)
-- [Legacy Platform and Service Boundaries](squadsync/legacy-platform-service-boundaries.md)
+- [Legacy Role and Membership Modeling in Context](squadsync/legacy-role-membership-context-modeling.md)
+- [Legacy Service Boundaries — Separating Team Data from Lineup Logic](squadsync/legacy-platform-service-boundaries.md)
 
 ### Soccer-Subber
 
-- [Explainable Lineup Engine](soccer-subber/explainable-lineup-engine.md)
+- [Making Lineup Decisions Explainable](soccer-subber/explainable-lineup-engine.md)
 
 ### TeamTracker
 

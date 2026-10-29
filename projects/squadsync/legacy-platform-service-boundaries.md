@@ -1,65 +1,45 @@
-# Legacy SquadSync Platform and Service Boundaries
+# Legacy SquadSync — Service Boundaries: Separating Team Data from Lineup Logic
 
-## Entry Metadata
+**Architecture Reflection** · SquadSync · Historical design exploration · May 2026
+
+<details>
+<summary>Metadata & related work</summary>
 
 | Field | Value |
 |---|---|
-| Title | Legacy SquadSync Platform and Service Boundaries |
-| Type | Architecture Reflection |
-| Subject | SquadSync |
-| Date | 2026-05-19 |
-| Status | Complete |
-| Phase | N/A |
-| Sprint | N/A |
-| Issue | N/A |
-| Tags | service-boundaries, integration, soccer-subber, event-driven-design, mvp-scope |
-| Related Repo | bbubb/squadsync_csharp |
-| Related Work | SquadSync and Soccer-Subber integration planning |
+| Status | Complete — retrospective |
+| Tags | modular-monolith, service-boundaries, integration, scope-control |
+| Source basis | Earlier SquadSync architecture exploration |
+| Public follow-up | https://github.com/bbubb/squadsync |
+
+</details>
 
 ## Summary
 
-As SquadSync grew conceptually, it became clear that not every soccer-related capability should live inside the core platform.
+As the early SquadSync concept expanded, one recurring question was whether specialized lineup and substitution planning belonged inside the team-management application. The plan was for SquadSync to store team, roster, and match data while Soccer-Subber calculated suggested lineups.
 
-Roster, team, user, role, and event management belong naturally in SquadSync. Lineup and substitution logic is specialized decision logic and fits better as a separate Soccer-Subber service.
+I wanted to define which application owned each responsibility before deciding whether they needed to communicate over a network.
 
-## Context
+## Key Outcomes
 
-The original SquadSync vision could expand into team management, tactical planning, communication, roles, permissions, scheduling, player profiles, stats, lineup optimization, notifications, and AI explanations.
+- Distinguished core team-management responsibilities from specialized recommendation logic.
+- Kept SquadSync as a modular monolith while planning a separate interface for lineup suggestions.
+- Deferred remote services, notifications, and AI explanations until a usable workflow justified them.
 
-The risk was turning SquadSync into a broad monolith before the MVP proved a single high-value workflow.
+## Engineering Reflections
 
-## Key Decisions
+### Team data and lineup suggestions have different owners
 
-### Treat SquadSync as the system of record
+SquadSync needs to own team, membership, roster, match, and lineup state. Soccer-Subber is concerned with suggesting assignments under soccer-specific constraints. That distinction is useful even before the two applications run as separately deployed services.
 
-SquadSync should own durable team context: users, teams, roles, rosters, events, and authorization boundaries.
+Separating this specialized logic made sense for the product, but it also created an opportunity to develop integration and cloud-engineering skills. I wanted to explore APIs, service contracts, and eventually AWS deployment patterns through a meaningful component, rather than add cloud services to SquadSync without a reason. I learned to define the interface first, then decide whether a separate deployment is worth the cost of network calls, failures, and operations.
 
-### Treat Soccer-Subber as a separate decision service
+### A separate code boundary did not require a deployed microservice
 
-Lineup generation has different logic, iteration speed, testing concerns, and future AI/optimization potential. Keeping it separate preserves a cleaner boundary.
+A small request/response contract would let SquadSync ask for a lineup suggestion without giving Soccer-Subber direct access to its database. I did not need to choose AWS services or event infrastructure to define that boundary. Reactive notifications and optional AI explanations could follow after the core workflow and integration contract were proven.
 
-### Keep notifications reactive
+This left deployment and failure-handling details for later, but avoided building a distributed system before the coach-facing workflow existed.
 
-Notifications should eventually react to events such as roster changes, lineup generation, or event updates.
+## Significance
 
-### Keep AI explanation as a later layer
-
-The lineup/substitution engine should remain deterministic and debuggable first. AI can explain or summarize outputs later without becoming the source of truth.
-
-## Trade-offs
-
-Service boundaries add integration complexity, but they clarify ownership and make the architecture easier to evolve.
-
-A monolith would be faster initially, but it would hide the distinction between durable platform state and specialized decision logic.
-
-## Lessons Learned
-
-Service boundaries should follow responsibility boundaries. SquadSync owns durable team context. Soccer-Subber owns lineup decision logic. Notifications react to events.
-
-## Current Relevance
-
-This boundary directly informs the current public SquadSync rebuild and the planned Soccer-Subber integration.
-
-## Next Steps
-
-The future MVP should prove one clean integration slice: roster context from SquadSync, lineup result from Soccer-Subber, and eventual event/notification behavior.
+I learned to separate responsibilities in code first, then add network calls or cloud services when the working product needs them. Soccer-Subber can still provide meaningful API and cloud-integration experience without making SquadSync itself a distributed system too early.

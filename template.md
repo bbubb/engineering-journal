@@ -18,25 +18,23 @@
 
 ## Summary
 
-In two to three concise paragraphs, explain what this entry covers, what changed or was learned, and why it matters.
+In one or two short paragraphs, explain what you built, changed, decided, or learned. State the most important result early, using concrete nouns and verbs. A reader unfamiliar with the project should understand the outcome without reading the implementation details.
 
-Write this so a broad reader can understand the significance without needing the implementation details.
+## Key Outcomes
 
-## At a Glance
+Use two to four short bullets naming concrete results, decisions, or lessons. For a certification or learning note, **Key Insights** may fit better.
 
-Use three to five short bullets for the most important outcomes, insights, or lessons.
+The Summary explains the story; these bullets provide quick evidence or distinct lessons. Do not restate the Summary or list technologies without explaining what they enabled.
 
-Do not repeat the Summary sentence-for-sentence. This section should let a reader decide quickly whether to continue.
+## Engineering Reflections
 
-## Key Themes / Reflections
-
-Organize the body around the few ideas that mattered most.
+Organize the body around the few ideas that mattered most. Use specific subheadings that tell a skimming reader what happened or what you learned.
 
 Each theme should be self-contained. Keep the relevant context, decision or insight, trade-off, personal reflection, and remaining uncertainty together instead of distributing one idea across separate global sections.
 
 ### [Meaningful theme heading]
 
-Explain the idea in plain English first, then add only the technical detail needed to substantiate it.
+Explain the idea in plain technical English first, then add the detail needed to substantiate it. Prefer a concrete example over abstract architecture language. Define an unfamiliar term briefly when necessary.
 
 Include trade-offs, changed judgment, or uncertainty here when they belong to this theme.
 
@@ -46,7 +44,7 @@ Repeat only for distinct ideas worth preserving.
 
 Prefer two to four strong themes over a long inventory of implementation details.
 
-## Open Questions / What Remains
+## Open Questions
 
 Optional.
 
@@ -54,13 +52,11 @@ Use only for meaningful cross-cutting questions, deferred decisions, or unresolv
 
 Delete this section when it would add little value.
 
-## Why It Matters
+## Significance
 
-Tie the entry together.
+In a short closing paragraph, explain what changed in your engineering judgment, understanding, or approach, and why you would apply that lesson again. Do not repeat the Summary or sell the work with generic portfolio claims. Omit this section if it adds no distinct insight.
 
-Explain why the work or learning remains useful: technically, professionally, for future decisions, or as evidence of growth. Keep this broader than a repetition of the individual themes.
-
-## What's Next
+## Next Steps
 
 Optional.
 
@@ -70,13 +66,13 @@ Record the next meaningful direction when the entry naturally leads to one. Avoi
 
 Use this single template for all journal entries.
 
-The headings are a framework, not a checklist. Omit, rename, or combine optional sections when that improves clarity or avoids repetition. Do not create content merely to fill every heading.
+The headings are a framework, not a checklist. Omit or combine optional sections when that improves clarity or avoids repetition. Rename **Key Outcomes** to **Key Insights** for learning notes when appropriate. Do not create content merely to fill every heading.
 
 ### Audience and editorial standard
 
 Write each entry as both a durable learning/history artifact and a public professional reflection.
 
-A broad reader should be able to skim the title, Summary, At a Glance, headings, and Why It Matters section and understand:
+A broad reader should be able to skim the title, Summary, Key Outcomes (or Key Insights), theme headings, and Significance and understand:
 - what was accomplished or learned;
 - why it mattered;
 - what judgment, ownership, or growth the work demonstrates;
@@ -85,13 +81,15 @@ A broad reader should be able to skim the title, Summary, At a Glance, headings,
 A technical reader should be able to continue into the themes and find enough concrete engineering detail to understand and evaluate the work.
 
 Prefer:
-- plain English before jargon;
+- plain technical English before jargon; concrete nouns and verbs before abstractions;
+- first-person judgment when it is genuine, without invented emotions, hindsight, or self-promotion;
 - outcome and insight before implementation detail;
 - theme-centered storytelling rather than category-centered reporting;
 - selective personal reflection where it shows changed judgment, uncertainty, or growth;
 - the few decisions and trade-offs that materially shaped the work;
 - links to repositories, issues, PRs, or technical docs for exhaustive detail;
-- short sections and minimal repetition.
+- short sections and minimal repetition;
+- accurate distinctions between work completed at the time, work planned then, and changes made later.
 
 Avoid turning an entry into:
 - a changelog;
@@ -101,6 +99,8 @@ Avoid turning an entry into:
 - a diary of every difficulty or decision.
 
 Do not expose private, proprietary, or unnecessary historical implementation detail merely to make the reflection more complete. The goal is a useful, credible record of real work and growth, not exhaustive disclosure.
+
+**Plain-language test:** Replace a sentence like “separate projects constrain dependency direction” with the concrete mechanism: “The Domain project does not reference Infrastructure, so business rules cannot call the database implementation directly.” Prefer the sentence a technically capable reader can understand without already knowing this project.
 
 ### Entry-type emphasis
 
@@ -116,9 +116,11 @@ Use the same flow with different emphasis rather than maintaining separate templ
 
 Keep the visible metadata line compact. Put archival/navigation detail in the collapsed `Metadata & related work` block.
 
-Do not repeat the title inside metadata.
+Do not repeat the title inside metadata. For related issues and PRs in **another repository**, use explicit links (for example, `[SquadSync PR #112](https://github.com/bbubb/squadsync/pull/112)`); bare `#112` may point to an issue in the journal repository instead.
 
-### Organization and filenames
+### Titles, organization, and filenames
+
+Keep major project identifiers such as **Phase 0**, **Sprint 0**, and **Phase 2** in project entry titles when relevant. Add a descriptive topic or takeaway rather than replacing those identifiers or repeating a generic phase name. For example: `SquadSync Phase 0 Foundation — Finding a Buildable MVP Boundary`.
 
 Organize entries by subject:
 
@@ -141,3 +143,7 @@ architecture/clean-architecture-boundaries.md
 ```
 
 Do not use date-prefixed filenames by default. Dates belong in metadata unless the entry is explicitly a chronological log.
+
+### Final review
+
+Before publishing, check the entry against the relevant repository, ADR, and PR evidence. Prefer current domain terminology when it makes the concept clearer to today's reader, but explain historical code names once where needed (for example, the represented-person entity was renamed from `User` to `Person` in Phase 3). Preserve decisions and outcomes as they existed at the time; never imply that a later refactor was already implemented. Make sure the title, Summary, Key Outcomes, and Significance can be understood without the body. Do not fabricate personal reflections or claim planned features as delivered.

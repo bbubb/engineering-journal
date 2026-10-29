@@ -23,4 +23,4 @@ Dates belong in entry metadata unless the entry is explicitly a chronological lo
 
 ### AWS
 
-- [Cantrill Tech Fundamentals](aws/cantrill-tech-fundamentals.md)
+- [Cantrill Tech Fundamentals — Connecting IT and Software Development to Cloud](aws/cantrill-tech-fundamentals.md)
