@@ -30,7 +30,7 @@ Use phase and sprint together when both are known and useful for project navigat
 
 ### Soccer-Subber
 
-- [Explainable Lineup Engine](soccer-subber/explainable-lineup-engine.md)
+- [Making Lineup Decisions Explainable](soccer-subber/explainable-lineup-engine.md)
 
 ### TeamTracker
 
