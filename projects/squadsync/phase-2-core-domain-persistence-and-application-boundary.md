@@ -28,7 +28,7 @@ I already knew how to use controllers, services, repositories, and interfaces. P
 
 - Built the first persisted SquadSync domain model around teams, membership, player profiles, and roster state.
 - Kept business rules separate from database code using .NET project references and an Application-owned persistence interface.
-- Used focused tests and real PostgreSQL validation to prove each small persistence slice before building on it.
+- Used focused tests and real PostgreSQL checks to validate each persistence slice before building on it.
 - Saw the issue → Codex implementation → draft PR → human review workflow become a practical development and learning system.
 
 ## Engineering Reflections
@@ -91,9 +91,9 @@ The implementation rhythm felt unusually granular at first. Small contracts were
 
 By the end of the phase, the pieces formed a working domain model, persistence layer, Application workflow, and repeatable demo scenario. The process is not strict test-first TDD; it is closer to defining intended behavior, implementing a small slice, adding focused tests, validating the relevant boundary, and merging only when there is evidence that the assumptions hold.
 
-The real PostgreSQL tests were particularly useful because they proved behavior that isolated unit tests cannot: actual materialization, relationships, uniqueness, rollback behavior, and provider-specific persistence assumptions.
+The real PostgreSQL tests were particularly useful because they checked behavior that isolated unit tests cannot: actual materialization, relationships, uniqueness, rollback behavior, and provider-specific persistence assumptions.
 
-I have not concluded that this development rhythm is universally better. Its value so far is that later work builds on code already tested for the behavior I rely on. Phase 3 should be a better test of whether that rigor continues to pay off once the work produces more visible end-to-end features.
+I have not concluded that this development rhythm is universally better. Its value so far is that later work builds on code already tested for the behavior I rely on. I expected Phase 3's end-to-end features to be a better test of whether that rigor continued to pay off.
 
 ### The agentic workflow became a working engineering loop
 
@@ -105,9 +105,7 @@ That division of labor is beginning to feel less like using AI to generate code 
 
 ## Significance
 
-Phase 2 moved SquadSync beyond scaffolding into real backend design: a persisted domain model, tested relational behavior, an Application workflow, and a repeatable development scenario.
-
-I can now trace the `AddPlayerToRoster` operation through its Application-owned persistence interface to EF Core and PostgreSQL, with tests checking both business rules and database behavior. That taught me more than the names of the patterns: I can explain where a rule belongs, why dependencies point inward, and what the extra structure costs.
+I can now trace the `AddPlayerToRoster` operation through its Application-owned persistence interface to EF Core and PostgreSQL, with tests checking both business rules and database behavior. I understand better which rules belong in a domain entity, which need an Application use case, and why the database implementation stays separate. The extra structure is useful when it makes those decisions easier to test and review—not simply because it follows a named architecture.
 
 ## Next Steps
 
