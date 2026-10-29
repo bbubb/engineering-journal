@@ -16,45 +16,45 @@
 
 ## Summary
 
-Phase 1 turned SquadSync's repository plans into an executable backend foundation. It established a .NET 10 ASP.NET Core solution with separate API, Application, Domain, and Infrastructure projects, unit and integration tests, basic GitHub Actions validation, and local PostgreSQL through Docker Compose.
+Phase 1 turned SquadSync's API plan into working code. It established a .NET 10 ASP.NET Core solution with separate API, Application, Domain, and Infrastructure projects, unit and integration tests, basic GitHub Actions validation, and local PostgreSQL through Docker Compose.
 
-The phase deliberately stopped short of domain persistence. Its more consequential outcome was testing two assumptions: whether the proposed architecture would create useful boundaries, and whether AI-assisted implementation could proceed reliably from repository-owned instructions and reviewable GitHub issues.
+The phase deliberately stopped short of domain persistence. I also used the phase to check whether the planned project structure helped in practice and whether Codex could complete scoped tasks using repository instructions and GitHub issues.
 
-## At a Glance
+## Key Outcomes
 
 - Established a buildable, testable API baseline without prematurely introducing domain tables or EF Core.
 - Distinguished API liveness from PostgreSQL-dependent readiness and tested failure/recovery behavior.
 - Kept routine CI tests independent of a running database while retaining separate environment-backed checks.
 - Used real implementation friction to refine the issue → Codex → PR → human review process.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
-### Architecture boundaries became enforceable before business logic arrived
+### Separate .NET projects made dependency rules visible
 
-The API solution separated Domain, Application, Infrastructure, and API responsibilities before adding the first soccer entities. That cost additional project structure, but it made dependency direction inspectable: Domain did not depend on persistence or HTTP, while API remained the composition and transport boundary.
+The API solution separated Domain, Application, Infrastructure, and API responsibilities before adding the first soccer entities. This added projects and references to maintain, but made it clear which layers could call which. Domain did not depend on database or HTTP code, and API handled incoming requests and application setup.
 
 I wanted this structure to help future changes, not merely make the repository look architectural. Holding EF Core, migrations, and domain tables until Phase 2 was part of the same decision. The database would be introduced in response to actual domain needs rather than shaping the model in advance.
 
 The risk was spending too long on scaffolding. Phase 1 accepted that cost temporarily, with the expectation that later phases would test whether the boundaries genuinely simplified implementation.
 
-### Operational reliability required more than a successful process start
+### A running API did not mean PostgreSQL was ready
 
-A functioning API is not necessarily an API capable of serving dependency-backed requests. SquadSync distinguished process liveness (`/health`) from PostgreSQL readiness (`/health/ready`), and validated readiness across database availability, failure, and recovery.
+The API process could be running even when PostgreSQL was unavailable. I used `/health` to check that the process was alive and `/health/ready` to check its database connection, then tested what happened when PostgreSQL stopped and recovered.
 
-I also learned to treat test speed and environmental realism as separate concerns. The standard `dotnet test` loop used deterministic in-process checks without requiring Docker, while a real PostgreSQL smoke check remained an explicit additional validation step. This did not establish comprehensive database behavior; it established a sensible foundation for adding those tests when persistence arrived.
+I kept the everyday `dotnet test` run fast by not requiring Docker. A separate smoke check connected to real PostgreSQL when I needed to validate the environment. This did not establish comprehensive database behavior; it established a sensible foundation for adding those tests when persistence arrived.
 
 Docker Compose provided a local database with loopback-only host exposure, a persistent volume, and a health check. GitHub Actions validated restore/build/test. Those operational choices were intentionally modest rather than attempts to simulate an entire cloud deployment.
 
-### Implementation exposed gaps in the AI-assisted workflow
+### Real Codex work exposed gaps in the planned workflow
 
-Phase 0's workflow was a design until it met real branches, credentials, approval controls, and Windows development constraints. Early runs exposed excessive context loading, Git-state ambiguity, and friction around commits, pushes, and draft-PR creation.
+Phase 0's workflow was a design until it met real branches, credentials, approval controls, and Windows development constraints. Early runs loaded too much project context, sometimes started with unclear Git branch state, and encountered problems with commits, pushes, and draft-PR creation.
 
-The response was to tighten task boundaries and startup checks, not grant unrestricted tool permissions or add speculative automation. GitHub issues became the scoped execution contract; Codex performed bounded implementation; the PR was the handoff; I retained architecture acceptance and merge authority.
+I made task boundaries and startup checks more explicit rather than removing tool restrictions or adding automation before it was needed. GitHub issues became the scoped execution contract; Codex performed bounded implementation; the PR was the handoff; I retained architecture acceptance and merge authority.
 
-That was a useful lesson about integration boundaries beyond application code: development tools have operational constraints of their own, and those constraints should be handled where they occur rather than leaking into the software architecture.
+I learned that Git and Codex failures needed fixes in the development workflow, not changes to the application architecture.
 
-## Why It Matters
+## Significance
 
-Phase 1 demonstrated that a professional baseline is not just a successful scaffold. It requires explicit dependency direction, useful health semantics, proportionate validation, and a development process that survives real execution. The phase also clarified an ongoing judgment call: foundational rigor is valuable only if it continues to support delivery of actual features.
+I learned that getting an API to compile was only the start. I also needed to know whether it detected a failed database connection, ran repeatable tests, and supported small reviewed changes. The foundation was worth building only if it helped deliver actual features.
 
 At Phase 1 closeout, the next meaningful test was domain persistence and a real application workflow, rather than further generic infrastructure hardening.
