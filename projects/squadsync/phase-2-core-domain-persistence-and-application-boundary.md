@@ -9,10 +9,10 @@
 |---|---|
 | Status | Complete |
 | Sprint | Sprints 3–6 |
-| Issue | Sprint trackers #82, #94, #102, #109 |
+| Issue | Sprint trackers [#82](https://github.com/bbubb/squadsync/issues/82), [#94](https://github.com/bbubb/squadsync/issues/94), [#102](https://github.com/bbubb/squadsync/issues/102), [#109](https://github.com/bbubb/squadsync/issues/109) |
 | Tags | domain-modeling, clean-architecture, ef-core, postgresql, dependency-inversion, integration-testing, agentic-workflow |
 | Related Repo | https://github.com/bbubb/squadsync |
-| Related Work | PRs #93, #101, #104, #107, #108, #112, #113 |
+| Related Work | SquadSync PRs [#93](https://github.com/bbubb/squadsync/pull/93), [#101](https://github.com/bbubb/squadsync/pull/101), [#104](https://github.com/bbubb/squadsync/pull/104), [#107](https://github.com/bbubb/squadsync/pull/107), [#108](https://github.com/bbubb/squadsync/pull/108), [#112](https://github.com/bbubb/squadsync/pull/112), [#113](https://github.com/bbubb/squadsync/pull/113) |
 
 </details>
 
@@ -20,7 +20,7 @@
 
 Phase 2 moved SquadSync from an API foundation into a persisted domain model with its first real Application workflow.
 
-The project now models Users, Teams, TeamMemberships with constrained TeamRoles, person-level PlayerProfiles, and team-specific RosterEntries. Those concepts are persisted through EF Core and PostgreSQL, tested both in isolation and against a real database, and exercised through an explicit Development demo scenario.
+At Phase 2 closeout, the model included `User`, `Team`, `TeamMembership` with a constrained `TeamRole`, person-level `PlayerProfile`, and team-specific `RosterEntry`. These were persisted through EF Core and PostgreSQL, tested both in isolation and against a real database, and exercised through a Development-only demo scenario.
 
 I already knew how to use controllers, services, repositories, and interfaces. Phase 2 showed me how .NET project references and an Application-owned persistence interface can keep database code out of business rules. Building the roster workflow also helped me decide which rules belong to a domain object and which need an Application use case.
 
