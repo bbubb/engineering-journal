@@ -10,7 +10,7 @@
 | Status | Complete — design phase |
 | Tags | agentic-workflow, context-engineering, codex, human-review, tooling |
 | Related Repo | https://github.com/bbubb/squadsync |
-| Related Work | PRs #39 and #42; companion Phase 0 foundation and Phase 1 retrospectives |
+| Related Work | SquadSync PRs [#39](https://github.com/bbubb/squadsync/pull/39) and [#42](https://github.com/bbubb/squadsync/pull/42); [Phase 0 foundation](phase-0-sprint-0-foundation.md) and [Phase 1 retrospective](phase-1-api-foundation-and-workflow-validation.md) |
 
 </details>
 
