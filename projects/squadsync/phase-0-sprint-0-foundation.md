@@ -10,7 +10,7 @@
 | Status | Complete |
 | Tags | mvp-scope, architecture, documentation, portfolio, planning |
 | Related Repo | https://github.com/bbubb/squadsync |
-| Related Work | Companion Phase 0 agentic workflow retrospective; project roadmap and MVP scope |
+| Related Work | [Phase 0 agentic workflow retrospective](phase-0-sprint-0-agentic-harness-engineering.md); [SquadSync roadmap](https://github.com/bbubb/squadsync/blob/main/docs/planning/project-roadmap.md) and [MVP scope](https://github.com/bbubb/squadsync/blob/main/docs/planning/mvp-scope.md) |
 
 </details>
 
