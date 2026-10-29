@@ -10,7 +10,7 @@
 | Status | Complete |
 | Tags | aspnet-core, dotnet, postgresql, docker, testing, ci, agentic-workflow |
 | Related Repo | https://github.com/bbubb/squadsync |
-| Related Work | PRs #49, #64, #67, #70, #71, #78, #79; deferred issue #72 |
+| Related Work | SquadSync PRs [#49](https://github.com/bbubb/squadsync/pull/49), [#64](https://github.com/bbubb/squadsync/pull/64), [#67](https://github.com/bbubb/squadsync/pull/67), [#70](https://github.com/bbubb/squadsync/pull/70), [#71](https://github.com/bbubb/squadsync/pull/71), [#78](https://github.com/bbubb/squadsync/pull/78), [#79](https://github.com/bbubb/squadsync/pull/79); deferred issue [#72](https://github.com/bbubb/squadsync/issues/72) |
 
 </details>
 
