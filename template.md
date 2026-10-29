@@ -122,10 +122,6 @@ Do not repeat the title inside metadata.
 
 Keep major project identifiers such as **Phase 0**, **Sprint 0**, and **Phase 2** in project entry titles when relevant. Add a descriptive topic or takeaway rather than replacing those identifiers or repeating a generic phase name. For example: `SquadSync Phase 0 Foundation — Finding a Buildable MVP Boundary`.
 
-Before publishing, check the entry against the relevant repository/ADR/PR evidence. Preserve the vocabulary and decisions used *at the time*; briefly note later renames or reversals when needed to prevent confusion. Make sure the title, Summary, Key Outcomes, and Significance can be understood without the body. Do not fabricate personal reflections or claim planned features as delivered.
-
-### Organization and filenames
-
 Organize entries by subject:
 
 - project-specific entries go under `projects/<project>/`;
@@ -147,3 +143,7 @@ architecture/clean-architecture-boundaries.md
 ```
 
 Do not use date-prefixed filenames by default. Dates belong in metadata unless the entry is explicitly a chronological log.
+
+### Final review
+
+Before publishing, check the entry against the relevant repository/ADR/PR evidence. Preserve the vocabulary and decisions used *at the time*; briefly note later renames or reversals when needed to prevent confusion. Make sure the title, Summary, Key Outcomes, and Significance can be understood without the body. Do not fabricate personal reflections or claim planned features as delivered.
