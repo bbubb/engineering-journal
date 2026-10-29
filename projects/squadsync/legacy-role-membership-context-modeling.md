@@ -22,7 +22,7 @@ The earlier design explored roles, approval requests, and permissions that could
 
 ## Key Outcomes
 
-- Explored contextual responsibilities rather than treating roles as global user properties.
+- Explored contextual responsibilities rather than treating roles as permanent properties of a person.
 - Encountered the cost of modeling extensibility before a narrow workflow existed.
 - Applied that lesson in the public MVP through explicit team memberships and constrained roles.
 
@@ -30,13 +30,13 @@ The earlier design explored roles, approval requests, and permissions that could
 
 ### A role needs a context
 
-The question “what role does this user have?” is incomplete without “for which team or organization?” A person can participate in distinct settings without having a different fundamental identity in each.
+The question “what role does this person have?” is incomplete without “for which team or organization?” A person can participate in distinct settings without having a different fundamental identity in each.
 
 The historical design explored how to represent that flexibility, including role assignment and approval concepts. It was useful domain exploration, but also introduced more persistence and authorization complexity than the initial soccer workflow could justify.
 
 ### Team membership solved the immediate problem without a general role system
 
-The public SquadSync rebuild uses `Person`, `Team`, and `TeamMembership` with one constrained `TeamRole` per membership. `PlayerProfile` holds person-level soccer information, while `RosterEntry` holds details for that person's place on a particular team. The first version of the rebuilt model called represented people `User`; Phase 3 renamed that entity to `Person` to avoid confusing a rostered person with a login account.
+The public SquadSync rebuild uses `Person` (formerly named `User` until the Phase 3 refactor), `Team`, and `TeamMembership` with one constrained `TeamRole` per membership. `PlayerProfile` holds person-level soccer information, while `RosterEntry` holds details for that person's place on a particular team. The rename distinguishes a represented person from a login account.
 
 I learned to model the relationship a coach needs today, then add flexibility only when another real workflow requires it. A general role system would have meant more database relationships, validation, and tests before the MVP needed them.
 
