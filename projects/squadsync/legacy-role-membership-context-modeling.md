@@ -16,7 +16,7 @@
 
 ## Summary
 
-An early SquadSync design challenge was separating a person's identity from responsibilities that change across teams and organizations. A global label such as “coach” or “player” could not adequately describe someone who participated in more than one context.
+An early SquadSync design challenge was separating a person represented in the system from responsibilities that change across teams and organizations. A global label such as “coach” or “player” could not adequately describe someone who participated in more than one context.
 
 The earlier design explored roles, approval requests, and permissions that could vary by team or organization. The lasting lesson was simpler: a person's responsibility belongs to their relationship with a team, not to the person everywhere in the system.
 
@@ -36,7 +36,7 @@ The historical design explored how to represent that flexibility, including role
 
 ### Team membership solved the immediate problem without a general role system
 
-The public SquadSync rebuild uses `Person` (formerly named `User` until the Phase 3 refactor), `Team`, and `TeamMembership` with one constrained `TeamRole` per membership. `PlayerProfile` holds person-level soccer information, while `RosterEntry` holds details for that person's place on a particular team. The rename distinguishes a represented person from a login account.
+The public SquadSync rebuild uses `Person` (formerly named `User` until the Phase 3 refactor), `Team`, and `TeamMembership` with one constrained `TeamRole` per membership. `PlayerProfile` holds person-level soccer information, while `RosterEntry` holds details for that person's place on a particular team. `Person` is not a login identity: a future `Account` or identity-provider principal and its relationship to represented people remain separate design decisions ([ADR 0006](https://github.com/bbubb/squadsync/blob/main/docs/adr/0006-represented-person-identity-api-contract.md)).
 
 I learned to model the relationship a coach needs today, then add flexibility only when another real workflow requires it. A general role system would have meant more database relationships, validation, and tests before the MVP needed them.
 
