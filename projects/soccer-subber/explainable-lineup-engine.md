@@ -19,13 +19,13 @@ Soccer-Subber began with a familiar coaching problem: planning lineups and subst
 
 The Python prototype generated lineups across match intervals using a scoring approach. It was a useful working experiment, not yet a finished coaching tool or integrated service.
 
-## At a Glance
+## Key Outcomes
 
 - Modeled players, formations, game plans, and timed lineup intervals.
 - Built a scoring-based assignment routine that tracked minutes and positional history.
 - Learned why an explainable recommendation still needs tests and constraint checks before a coach can rely on it.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
 ### Coaching priorities became competing software rules
 
@@ -35,16 +35,16 @@ Turning coaching judgment into explicit data and scoring rules made the trade-of
 
 ### Explainable scoring was useful, but not a guarantee
 
-The algorithm scored player-position combinations, selected assignments greedily, tracked playing time and position history, and logged the reasoning behind scores. That made a recommendation easier to understand and troubleshoot than an opaque result.
+The algorithm scored player-position combinations, chose the highest-ranked available assignments one at a time, tracked playing time and position history, and logged the scores used for those choices. That made a recommendation easier to understand and troubleshoot than an opaque result.
 
 The trade-off is that a locally attractive assignment is not necessarily best for the entire match. Playing-time targets influenced scores but were not all enforced as hard constraints. A more dependable tool would need scenario-based tests, clearer distinction between requirements and preferences, and validation of the final schedule.
 
-### A future service needs a clearer boundary
+### SquadSync integration will need a clear service contract
 
-The prototype helped demonstrate that lineup recommendation logic could be treated separately from team and roster management. Moving toward SquadSync integration would require a defined input/output contract, stronger validation, and a testable service interface.
+The prototype helped demonstrate that lineup recommendation logic could be treated separately from team and roster management. Integrating it with SquadSync would require a defined request and response, stronger input validation, and tests for the service interface.
 
 That remains an architectural direction rather than a capability of the historical script. The immediate value of the prototype was learning how to translate a real coaching problem into explainable, testable algorithmic decisions.
 
-## Why It Matters
+## Significance
 
 Soccer-Subber connected my on-field experience with practical Python modeling and algorithm design. Its most durable lesson was that explainability helps a coach understand a recommendation, while reliability requires independently verifying that the recommendation respects the constraints that matter.
