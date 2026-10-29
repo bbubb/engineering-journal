@@ -116,7 +116,7 @@ Use the same flow with different emphasis rather than maintaining separate templ
 
 Keep the visible metadata line compact. Put archival/navigation detail in the collapsed `Metadata & related work` block.
 
-Do not repeat the title inside metadata.
+Do not repeat the title inside metadata. For related issues and PRs in **another repository**, use explicit links (for example, `[SquadSync PR #112](https://github.com/bbubb/squadsync/pull/112)`); bare `#112` may point to an issue in the journal repository instead.
 
 ### Titles, organization, and filenames
 
