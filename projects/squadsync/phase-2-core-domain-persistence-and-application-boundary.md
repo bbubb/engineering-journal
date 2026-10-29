@@ -54,7 +54,7 @@ The cost is more projects, interfaces, tests, and files to maintain. I wanted Ph
 
 ### Modeling relationships and lifecycles clarified where rules belong
 
-`TeamMembership` links a `Person` to a `Team` and carries one constrained `TeamRole`. A membership has its own rules; it is not simply a role stored on the person. The Phase 3 rename makes the distinction explicit: a person on a roster does not need an authentication account ([ADR 0006](https://github.com/bbubb/squadsync/blob/main/docs/adr/0006-represented-person-identity-api-contract.md)).
+`TeamMembership` links a `Person` to a `Team` and carries one constrained `TeamRole`. A membership has its own rules; it is not simply a role stored on the person. The Phase 3 rename makes the distinction explicit: a person on a roster does not need to sign in. A future `Account` or external login identity would be a separate concept; its name, relationship to represented people, and authorization rules remain deferred ([ADR 0006](https://github.com/bbubb/squadsync/blob/main/docs/adr/0006-represented-person-identity-api-contract.md)).
 
 A similar distinction emerged between `PlayerProfile` and `RosterEntry`. PlayerProfile contains person-level soccer attributes, while RosterEntry contains state that belongs to that person's membership on a particular team. That made it easier to see which information belongs to a person and which belongs to a particular team roster.
 
