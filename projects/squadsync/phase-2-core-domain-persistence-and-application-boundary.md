@@ -20,7 +20,7 @@
 
 Phase 2 moved SquadSync from an API foundation into a persisted domain model with its first real Application workflow.
 
-At Phase 2 closeout, the model included `User`, `Team`, `TeamMembership` with a constrained `TeamRole`, person-level `PlayerProfile`, and team-specific `RosterEntry`. These were persisted through EF Core and PostgreSQL, tested both in isolation and against a real database, and exercised through a Development-only demo scenario.
+Phase 2 established team and roster data around represented people (now `Person`), `Team`, and `TeamMembership`, with one constrained `TeamRole` per membership. It also introduced person-level `PlayerProfile` and team-specific `RosterEntry`. These were persisted through EF Core and PostgreSQL, tested both in isolation and against a real database, and exercised through a Development-only demo scenario.
 
 I already knew how to use controllers, services, repositories, and interfaces. Phase 2 showed me how .NET project references and an Application-owned persistence interface can keep database code out of business rules. Building the roster workflow also helped me decide which rules belong to a domain object and which need an Application use case.
 
@@ -54,7 +54,7 @@ The cost is more projects, interfaces, tests, and files to maintain. I wanted Ph
 
 ### Modeling relationships and lifecycles clarified where rules belong
 
-`TeamMembership` represents the relationship between a `User` and a `Team`, with one constrained `TeamRole`. A membership has its own rules; it is not simply a role stored on the user. **Historical note:** Phase 3 later renamed the represented `User` entity to `Person` to distinguish a rostered person from an authentication account ([ADR 0006](https://github.com/bbubb/squadsync/blob/main/docs/adr/0006-represented-person-identity-api-contract.md)).
+`TeamMembership` links a `Person` to a `Team` and carries one constrained `TeamRole`. A membership has its own rules; it is not simply a role stored on the person. **Historical note:** The represented-person entity was named `User` during Phase 2. Phase 3 renamed it to `Person` to distinguish a rostered person from an authentication account ([ADR 0006](https://github.com/bbubb/squadsync/blob/main/docs/adr/0006-represented-person-identity-api-contract.md)).
 
 A similar distinction emerged between `PlayerProfile` and `RosterEntry`. PlayerProfile contains person-level soccer attributes, while RosterEntry contains state that belongs to that person's membership on a particular team. That made it easier to see which information belongs to a person and which belongs to a particular team roster.
 
