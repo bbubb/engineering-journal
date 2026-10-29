@@ -1,4 +1,4 @@
-# SquadSync Phase 0 — Designing an AI-Assisted Engineering Workflow
+# SquadSync Phase 0 Agentic Harness — Designing an AI-Assisted Workflow
 
 **Project Retrospective** · SquadSync · Phase 0, Sprint 0 · May 2026
 
@@ -16,41 +16,41 @@
 
 ## Summary
 
-SquadSync's initial setup became an experiment in making AI-assisted development repeatable on a solo-developer budget. I explored whether ChatGPT, GitHub, and Codex CLI could support a disciplined, sequential workflow with clear responsibilities, durable context, validation expectations, and human-controlled review.
+I wanted a low-cost way to use ChatGPT, GitHub, and Codex CLI to build SquadSync without losing control of scope, testing, or merges. During Phase 0, I designed a step-by-step workflow that gave each tool a clear job and kept the decisions in the repository.
 
-Phase 0 produced a documented workflow design—not an autonomous multi-agent system. Its success could not be assumed until actual implementation work tested the instructions, Git operations, and review handoffs.
+Phase 0 produced instructions and a workflow design, not an autonomous multi-agent system. I still needed real implementation tasks to find out whether the instructions, Git operations, and review handoffs worked.
 
-## At a Glance
+## Key Outcomes
 
-- Established GitHub documents, issues, and PRs as durable context instead of relying on chat history.
+- Stored decisions, task scope, and review history in GitHub instead of relying on past chat conversations.
 - Separated tool-independent engineering rules from Codex- and ChatGPT-specific instructions.
 - Distinguished readable workflow documentation from native tool configuration and executable automation.
 - Deferred hooks, active subagents, and other automation until real friction justified them.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
-### Durable task context mattered more than elaborate prompts
+### GitHub issues gave each implementation task a clear starting point
 
-A recurring risk with AI assistance is that the next implementation session may not know why a decision was made or what work is authorized. The design therefore put product scope, architecture, agent instructions, task contracts, and validation expectations in versioned repository artifacts.
+An AI coding session can start without knowing why a decision was made or which files it is allowed to change. The design therefore put product scope, architecture, agent instructions, task contracts, and validation expectations in versioned repository artifacts.
 
-GitHub issues were intended to describe bounded changes and acceptance criteria; pull requests would expose the implementation for review. This added documentation overhead, but avoided treating an individual conversation as an authoritative source of project state.
+GitHub issues were intended to describe bounded changes and acceptance criteria; pull requests would expose the implementation for review. This required extra documentation, but meant a new session could read the task and its constraints without relying on my previous conversations.
 
-The difficult judgment was how much context to load. Too little invites guessing; too much wastes attention and can bury the immediate task. Scoped instructions and issue-first execution were the preferred direction, to be validated during implementation.
+I had to decide how much context to provide. Too little encourages guessing; too much hides the actual task in unrelated documentation. Scoped instructions and issue-first execution were the preferred direction, to be validated during implementation.
 
-### Human authority and tool-specific execution needed different boundaries
+### I kept architecture and merge decisions under human control
 
-The workflow separated architectural and product decisions from mechanical execution. I retained responsibility for scope, trade-offs, validation, and merges; AI tools could draft, implement approved slices, and surface questions.
+I separated decisions about the product and architecture from the implementation work Codex could perform. I retained responsibility for scope, trade-offs, validation, and merges; AI tools could draft, implement approved slices, and surface questions.
 
-Tool-agnostic policy was useful at the decision level, but Codex skills, command permissions, CLI behavior, and ChatGPT/GitHub interaction needed their own operational guidance. One important correction was recognizing that a document *describing* a skill is not the same as a tool-native skill the agent can invoke.
+The same project rules could guide different tools, but Codex skills, command permissions, and GitHub operations needed instructions specific to each tool. One important correction was recognizing that a document *describing* a skill is not the same as a tool-native skill the agent can invoke.
 
-The trade-off was maintaining multiple layers of instructions. That only makes sense if the shared rules stay stable and tool-specific guidance remains small and purposeful.
+That created more instruction files to maintain. I wanted the shared rules to stay short and stable, with tool-specific details added only where needed.
 
-### Designing a harness was not proof of one
+### Writing workflow instructions did not prove they worked
 
-I considered ideas from broader harness-engineering practice—structured context, reusable skills, hooks, subagents, and staged planning—but chose a low-cost sequential model. Native skills and scoped instruction files were prepared; hooks, autonomous subagents, MCP integration, and broader orchestration were not activated as completed capabilities.
+I considered reusable skills, hooks, subagents, and staged planning, but chose to start with one implementation agent working on one scoped issue at a time. I prepared tool-recognized Codex skills and scoped instructions. Hooks, autonomous subagents, MCP integration, and multi-agent orchestration were not running.
 
-The project initially risked spending more effort on the mechanism of development than on the MVP itself. Closing Phase 0 forced a more useful standard: retain the minimum repeatable workflow, document the remaining uncertainty, and test it against real code changes.
+I risked spending more time designing the workflow than building SquadSync. I closed Phase 0 with a simpler rule: keep only the instructions needed to start coding, then improve them when actual tasks reveal a problem.
 
-## Why It Matters
+## Significance
 
-The lesson was not that more AI tooling creates better engineering. It was that **explicit ownership, recoverable context, and observable review boundaries** make AI assistance safer and easier to learn from. Phase 0 established those hypotheses; Phase 1's API work supplied the first practical evidence of where the workflow helped and where it needed correction.
+I learned that useful AI assistance depends more on clear task scope and human review than on the number of agents or tools. Phase 0 defined that approach; Phase 1's API work showed where the instructions helped and where they needed correction.
