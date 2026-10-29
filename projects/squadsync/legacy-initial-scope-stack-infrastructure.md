@@ -18,32 +18,32 @@
 
 The earlier SquadSync prototype was a soccer tactical-management application for coaches, managers, players, and parents. It used a layered ASP.NET Core backend with MySQL, DTOs, services and repositories, API versioning, exception handling, and structured logging.
 
-That work gave me experience building a realistic backend foundation. In retrospect, it also exposed a tension between designing for a broad platform and delivering a small, usable product.
+That work taught me how the pieces of a backend fit together. It also showed how much time I could spend preparing for future features before delivering one useful coach-facing workflow.
 
-## At a Glance
+## Key Outcomes
 
-- Built an early layered API backed by relational persistence.
+- Built an ASP.NET Core API with controllers, services, repositories, and MySQL persistence.
 - Introduced observability with Serilog, Seq, and correlation IDs.
 - Learned that technically reasonable foundations can still outpace validated product scope.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
-### Structure improved separation but came with an upfront cost
+### Layers clarified responsibilities but delayed the first feature
 
-Controllers, services, repositories, DTOs, and persistence responsibilities were separated rather than concentrated in endpoints. MySQL and EF Core made entity relationships and migrations part of the design. These choices helped me reason about responsibilities, but also increased the amount of code and configuration needed before a coach-facing workflow was usable.
+Controllers, services, repositories, DTOs, and persistence responsibilities were separated rather than concentrated in endpoints. MySQL and EF Core made entity relationships and migrations part of the design. These choices made responsibilities clearer, but required more code and configuration before a coach could use the application.
 
 The lasting lesson was not that every small application needs several layers. It was that boundaries should make a concrete change easier to understand or test.
 
-### Observability was a useful early investment
+### Structured logs made backend requests easier to trace
 
-Serilog and Seq offered structured visibility into application behavior. Correlation-ID and exception middleware addressed the reality that failures can cross several processing steps before surfacing in an API response.
+Serilog produced structured logs that I could inspect in Seq. Correlation IDs helped connect messages from the same request, while exception middleware gave the API a consistent way to handle failures.
 
-Unlike speculative platform abstractions, this was a practical concern even in a small system: tracing a request through the backend is valuable long before cloud deployment. API versioning, by contrast, introduced complexity before multiple public API versions were necessary.
+Even a small backend benefits from being able to trace a request through its layers when something fails. API versioning, by contrast, introduced complexity before multiple public API versions were necessary.
 
-### Product scope mattered more than architectural breadth
+### The next coach workflow mattered more than future features
 
 The historical project considered many entities and capabilities before one complete user workflow had been established. The subsequent public rebuild kept the lessons of layering and observability while narrowing its initial feature set and simplifying the domain.
 
-## Why It Matters
+## Significance
 
-This prototype is a useful reference point for how my engineering judgment evolved: from investing broadly in infrastructure and flexibility toward asking which architectural decisions actually reduce risk for the next deliverable. Those lessons inform the narrower, more deliberate implementation in the current SquadSync repository.
+I learned to ask whether each layer or tool helps the next real feature, rather than adding it because a larger platform might need it someday. The public SquadSync rebuild applies that narrower approach while keeping the useful lessons about separation of responsibilities and request tracing.
