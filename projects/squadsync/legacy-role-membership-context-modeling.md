@@ -1,4 +1,4 @@
-# Legacy SquadSync — Modeling Roles in Context
+# Legacy SquadSync — Role and Membership Modeling in Context
 
 **Architecture Reflection** · SquadSync · Earlier domain-model exploration · May 2026
 
@@ -18,15 +18,15 @@
 
 An early SquadSync design challenge was separating a person's identity from responsibilities that change across teams and organizations. A global label such as “coach” or “player” could not adequately describe someone who participated in more than one context.
 
-The earlier design explored a generalized role-bearing approach, alongside organizational context, role requests, and permissions. The most durable lesson was not the abstraction itself: it was recognizing that a **relationship can carry business meaning and rules** without becoming a permanent attribute of a person.
+The earlier design explored roles, approval requests, and permissions that could vary by team or organization. The lasting lesson was simpler: a person's responsibility belongs to their relationship with a team, not to the person everywhere in the system.
 
-## At a Glance
+## Key Outcomes
 
 - Explored contextual responsibilities rather than treating roles as global user properties.
 - Encountered the cost of modeling extensibility before a narrow workflow existed.
-- Carried the relationship-first insight into the simpler public MVP model.
+- Applied that lesson in the public MVP through explicit team memberships and constrained roles.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
 ### A role needs a context
 
@@ -34,12 +34,12 @@ The question “what role does this user have?” is incomplete without “for w
 
 The historical design explored how to represent that flexibility, including role assignment and approval concepts. It was useful domain exploration, but also introduced more persistence and authorization complexity than the initial soccer workflow could justify.
 
-### Explicit membership was a better MVP boundary
+### Team membership solved the immediate problem without a general role system
 
-The public SquadSync rebuild deliberately narrowed the problem to `User`, `Team`, and `TeamMembership` with a constrained `TeamRole`. It also distinguishes person-level `PlayerProfile` data from team-specific `RosterEntry` data. Those decisions preserve the important domain distinction while avoiding a generalized authorization framework.
+The public SquadSync rebuild uses `Person`, `Team`, and `TeamMembership` with one constrained `TeamRole` per membership. `PlayerProfile` holds person-level soccer information, while `RosterEntry` holds details for that person's place on a particular team. The first version of the rebuilt model called represented people `User`; Phase 3 renamed that entity to `Person` to avoid confusing a rostered person with a login account.
 
-What changed in my judgment was where to place extensibility: first define the relationship and lifecycle the product actually needs, then expand only when another concrete workflow demonstrates the need. Flexibility has a real cost in schema design, validation, and testability.
+I learned to model the relationship a coach needs today, then add flexibility only when another real workflow requires it. A general role system would have meant more database relationships, validation, and tests before the MVP needed them.
 
-## Why It Matters
+## Significance
 
-This was an early example of moving from theoretically broad domain modeling toward explicit, verifiable product behavior. That shift—from modeling broad possible relationships to implementing the relationships a coach actually needs—continues to guide how I approach domain scope.
+This changed how I approach domain modeling: start with the team relationships the product actually uses, not a role system designed for every possible future organization.
