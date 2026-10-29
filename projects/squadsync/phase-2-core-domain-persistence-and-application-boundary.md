@@ -22,20 +22,20 @@ Phase 2 moved SquadSync from an API foundation into a persisted domain model wit
 
 The project now models Users, Teams, TeamMemberships with constrained TeamRoles, person-level PlayerProfiles, and team-specific RosterEntries. Those concepts are persisted through EF Core and PostgreSQL, tested both in isolation and against a real database, and exercised through an explicit Development demo scenario.
 
-The larger outcome for me was architectural clarity. I already had experience with controllers, services, repositories, interfaces, and domain concepts. This phase made it much clearer how Clean Architecture turns some logical separations into physically enforced dependency boundaries, how domain modeling affects implementation structure, and how disciplined incremental validation can reduce uncertainty as the system grows.
+I already knew how to use controllers, services, repositories, and interfaces. Phase 2 showed me how .NET project references and an Application-owned persistence interface can keep database code out of business rules. Building the roster workflow also helped me decide which rules belong to a domain object and which need an Application use case.
 
-## At a Glance
+## Key Outcomes
 
 - Built the first persisted SquadSync domain model around teams, membership, player profiles, and roster state.
-- Made Clean Architecture dependency boundaries concrete through separate .NET projects and the first Application-to-Infrastructure persistence contract.
+- Kept business rules separate from database code using .NET project references and an Application-owned persistence interface.
 - Used focused tests and real PostgreSQL validation to prove each small persistence slice before building on it.
 - Saw the issue → Codex implementation → draft PR → human review workflow become a practical development and learning system.
 
-## Key Themes / Reflections
+## Engineering Reflections
 
-### Clean Architecture made familiar layering physically enforceable
+### Project references made the layer boundaries enforceable
 
-I was already comfortable with controller/service/repository-style layering, so separation of concerns was not new. The important shift was seeing how separate projects can constrain dependency direction rather than relying mainly on convention.
+I had used controllers, services, and repositories before. This time I separated Domain, Application, Infrastructure, and API into .NET projects. Domain does not reference Infrastructure or API, so its code cannot call their database or HTTP implementations without changing the project dependencies.
 
 ```text
 API -> Application
@@ -46,17 +46,17 @@ Application -> Domain
 Domain -> no outer project
 ```
 
-Application cannot casually reach into EF Core or PostgreSQL without changing the project dependency itself. The architecture can still be violated, but doing so becomes a visible design decision rather than an incidental reference.
+Application also does not reference Infrastructure. It defines the persistence interface its use case needs, and Infrastructure implements that interface with EF Core. Crossing that boundary would require an explicit dependency change.
 
-This helped me distinguish logical layering from a stronger architectural boundary. It also sharpened the difference between being **domain-oriented** and following a more deliberately **domain-driven** implementation process. My earlier development experience already involved substantial domain thinking; the difference here is that business concepts and use cases more directly influence both structure and implementation order.
+In earlier projects, layers were largely a way to organize responsibilities. Here, the project references also make those rules visible during development and review. I had already thought in domain terms, but this work pushed me to let real business rules shape the code before adding abstractions.
 
-The trade-off is additional ceremony and cognitive overhead. More boundaries, contracts, tests, and files are not automatically better. I am interested to see whether the structure continues to earn that cost as Phase 3 introduces complete HTTP-to-database workflows.
+The cost is more projects, interfaces, tests, and files to maintain. I wanted Phase 3's HTTP-to-database workflows to test whether those boundaries were worth the extra work.
 
 ### Modeling relationships and lifecycles clarified where rules belong
 
-`TeamMembership` represents the relationship between a `User` and a `Team`, with one constrained `TeamRole`. Treating that relationship as its own concept reinforced an important lesson: sometimes the relationship between two things carries enough identity, state, or rules to deserve its own model.
+`TeamMembership` represents the relationship between a `User` and a `Team`, with one constrained `TeamRole`. A membership has its own rules; it is not simply a role stored on the user. **Historical note:** Phase 3 later renamed the represented `User` entity to `Person` to distinguish a rostered person from an authentication account ([ADR 0006](https://github.com/bbubb/squadsync/blob/main/docs/adr/0006-represented-person-identity-api-contract.md)).
 
-A similar distinction emerged between `PlayerProfile` and `RosterEntry`. PlayerProfile contains person-level soccer attributes, while RosterEntry contains state that belongs to that person's membership on a particular team. Keeping those lifecycles separate made concepts such as domain state and relationship-specific state much less abstract.
+A similar distinction emerged between `PlayerProfile` and `RosterEntry`. PlayerProfile contains person-level soccer attributes, while RosterEntry contains state that belongs to that person's membership on a particular team. That made it easier to see which information belongs to a person and which belongs to a particular team roster.
 
 The phase also produced a practical way to think about rule ownership:
 
@@ -75,7 +75,7 @@ AddPlayerToRoster
     -> persist through an Application-owned contract
 ```
 
-This was also the first concrete example in SquadSync that helped Dependency Inversion move beyond "use an interface" for me:
+This was the first time dependency inversion felt practical rather than just advice to “use an interface”:
 
 ```text
 AddPlayerToRoster
@@ -83,17 +83,17 @@ AddPlayerToRoster
         <- EfRosterPersistence
 ```
 
-The higher-level Application layer defines the capability its workflow needs; Infrastructure supplies the EF Core/PostgreSQL implementation. That mental model is clearer now, although I expect to keep refining interface ownership as the Application surface grows.
+Application defines what it needs to save a roster entry; Infrastructure supplies the EF Core/PostgreSQL code. I could now see why the interface belongs with the use case rather than the database implementation.
 
 ### Small validated slices started to justify their initial overhead
 
 The implementation rhythm felt unusually granular at first. Small contracts were defined, implemented, tested, persisted, and validated before the next piece was added. For simple entities and relationships, that sometimes felt overly formal compared with designing a broader structure up front.
 
-By the end of the phase, the pieces had started to compose into something more recognizable: a domain model, persistence layer, Application workflow, and repeatable demo scenario. The process is not strict test-first TDD; it is closer to defining intended behavior, implementing a small slice, adding focused tests, validating the relevant boundary, and merging only when there is evidence that the assumptions hold.
+By the end of the phase, the pieces formed a working domain model, persistence layer, Application workflow, and repeatable demo scenario. The process is not strict test-first TDD; it is closer to defining intended behavior, implementing a small slice, adding focused tests, validating the relevant boundary, and merging only when there is evidence that the assumptions hold.
 
 The real PostgreSQL tests were particularly useful because they proved behavior that isolated unit tests cannot: actual materialization, relationships, uniqueness, rollback behavior, and provider-specific persistence assumptions.
 
-I have not concluded that this development rhythm is universally better. Its value so far is that later behavior is being built on components whose important assumptions have already been exercised. Phase 3 should be a better test of whether that rigor continues to pay off once the work produces more visible end-to-end features.
+I have not concluded that this development rhythm is universally better. Its value so far is that later work builds on code already tested for the behavior I rely on. Phase 3 should be a better test of whether that rigor continues to pay off once the work produces more visible end-to-end features.
 
 ### The agentic workflow became a working engineering loop
 
@@ -103,16 +103,14 @@ Issues define bounded intent and acceptance criteria, Codex performs scoped impl
 
 That division of labor is beginning to feel less like using AI to generate code and more like an accelerated engineering workflow. Just as importantly, reviewing real implementations has helped architecture terminology become concrete. Concepts such as persistence, application orchestration, domain state, and dependency inversion are easier to understand when I can trace them through a real change and challenge the decisions during review.
 
-## Why It Matters
+## Significance
 
 Phase 2 moved SquadSync beyond scaffolding into real backend design: a persisted domain model, tested relational behavior, an Application workflow, and a repeatable development scenario.
 
-The technical work demonstrates domain and relational modeling, Clean Architecture dependency boundaries, EF Core/PostgreSQL migrations, application orchestration, Dependency Injection, emerging Dependency Inversion understanding, and real-database integration testing.
+I can now trace the `AddPlayerToRoster` operation through its Application-owned persistence interface to EF Core and PostgreSQL, with tests checking both business rules and database behavior. That taught me more than the names of the patterns: I can explain where a rule belongs, why dependencies point inward, and what the extra structure costs.
 
-For me, the more important growth is moving from recognizing familiar patterns such as layers, services, repositories, and interfaces toward understanding more precisely why those boundaries exist, what they cost, which direction dependencies should point, and how business concepts can drive implementation decisions.
+## Next Steps
 
-## What's Next
+At Phase 2 closeout, the next planned step was to expose the team-and-roster model through an HTTP API.
 
-Phase 3 will expose the completed team-and-roster model through a usable HTTP API.
-
-That should provide a useful test of several ideas that are still developing for me: how Application services and interfaces evolve as the surface grows, whether domain/use-case organization remains intuitive at larger scale, and whether the additional Clean Architecture structure continues to justify its overhead once the project is delivering complete features.
+That would test several questions I was still working through: how Application services and interfaces evolve as the surface grows, whether domain/use-case organization remains intuitive at larger scale, and whether the additional Clean Architecture structure continues to justify its overhead once the project is delivering complete features.
