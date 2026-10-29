@@ -46,11 +46,11 @@ The entry metadata identifies the format, such as project retrospective, technic
 
 ### Soccer-Subber
 
-- [Explainable Lineup Engine](projects/soccer-subber/explainable-lineup-engine.md)
+- [Making Lineup Decisions Explainable](projects/soccer-subber/explainable-lineup-engine.md)
 
 ### AWS
 
-- [Cantrill Tech Fundamentals](topics/aws/cantrill-tech-fundamentals.md)
+- [Cantrill Tech Fundamentals — Connecting IT and Software Development to Cloud](topics/aws/cantrill-tech-fundamentals.md)
 
 ## Indexes
 
