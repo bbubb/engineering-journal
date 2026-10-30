@@ -36,6 +36,7 @@ The entry metadata identifies the format, such as project retrospective, technic
 
 ### SquadSync
 
+- [Phase 3 HTTP Workflows and Implementation Ownership](projects/squadsync/phase-3-http-workflows-and-implementation-ownership.md)
 - [Phase 2 Core Domain, Persistence, and Application Boundary](projects/squadsync/phase-2-core-domain-persistence-and-application-boundary.md)
 - [Phase 1 API Foundation and Workflow Validation](projects/squadsync/phase-1-api-foundation-and-workflow-validation.md)
 - [Phase 0 Foundation — Finding a Buildable MVP Boundary](projects/squadsync/phase-0-sprint-0-foundation.md)
